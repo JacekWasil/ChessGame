@@ -11,7 +11,7 @@ def czysiezawieraXwY(x, y):
         w = w + 1
     return out
 
-print ('dupa')
+print ('dupaa')
 
 
 print(czysiezawieraXwY(krotka1, krotka2))
