@@ -30,7 +30,9 @@ def signebutton(fieldname, whostart, chessboard):
         lastsigned = square.get(fieldname).name
 
     #print(f'actulchoice: {actualchoice}, lastsigned: {lastsigned}')
-    if lastsigned != fieldname and lastsigned != '':# and pawnmoveenable(lastsigned, actualchoice, chessboard): #warunek z dupy do zmiany
+    #check if move is possible
+
+    if lastsigned != fieldname and lastsigned != '' and pawnmoveenable(lastsigned, fieldname, square): #warunek pawnmoveenable do zmiany na jakas funkcje zbiorcz
         if whoturn == 'White':
             x = 'w'
         else:

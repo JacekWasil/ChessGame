@@ -36,7 +36,9 @@ img_collection = {'wpawn_img' : wpawn_img, 'wrook_img' : wrook_img, 'wknight_img
                   'bqueen_img' : bqueen_img, 'bking_img' : bking_img, 'wsquare_img' : wsquare_img, 'bsquare_img' : bsquare_img}
 
 
-
+###############################################   TEST    BOARD    ##############################################
+labellist = {}
+###############################################   END TEST BOARD   ##############################################
 
 #print (square.get('a1').squareColour)
 def changeFiguresColour():
@@ -71,15 +73,36 @@ def changeFiguresColour():
                 text = Label(text=f"{item[-1:]}", bg='light green')
                 text.place(x=posx - 55, y=posy - 50)
 
+        ###############################################   TEST    BOARD    ##############################################
+        labellist[f'{item}'] = item
+        ###############################################   END TEST BOARD   ##############################################
+
         fig = globals()[figgeneration(square.get(item).figureColour, square.get(item).figureType, square.get(item).squareColour)]
         squarebutton[item] = Button(root, text=f'{item}', bg=square.get(f'{item}').squareColour, image = fig, command= lambda x= item, y= turn, z= squarebutton: signebutton(str(x), y, z) and figmove())
         squarebutton[item].place(x=square.get(f'{item}').posX, y=square.get(f'{item}').posY)
         item = next(iterator, None)
 
+    ###############################################   TEST    BOARD    ##############################################
+    testboard()
+    ###############################################   END TEST BOARD   ##############################################
 
 
-ChooseColourBtn = Button(root, text='Start', bg = 'yellow', padx=33, pady=31, command=changeFiguresColour)
-ChooseColourBtn.place(x=700, y=0)
+ChooseColourBtn = Button(root, text='Start', bg = 'yellow', padx=14, pady=16, command=changeFiguresColour)
+ChooseColourBtn.place(x=0, y=50)
+
+
+###############################################   TEST    BOARD    ##############################################
+def testboard():
+    for i in labellist:
+        tempclear = '          '
+        tempfigcolour = square.get(f'{i}').figureColour
+        tempfigtype = square.get(f'{i}').figureType
+        if square.get(f'{i}').figureColour == ' ' and square.get(f'{i}').figureType == ' ':
+            tempfigcolour = tempclear
+            tempfigtype = tempclear
+        labellist[i] = Label(text= f'{tempfigcolour} \n{tempfigtype}', bg='light green')
+        labellist[i].place(x=square.get(f'{i}').posX + 550, y=square.get(f'{i}').posY + 18)
+###############################################   END TEST BOARD   ##############################################
 
 
 
@@ -112,9 +135,10 @@ def figmove():
         turdiplay = Label(text=f" It is {turn} turn", bg='light green')
         turdiplay.place(x=0, y=0)
 
-        ######################################################   TEST
-        # print(square.get('a1').figureColour)
-        # print(square.get('a1').figureType)
+        ###############################################   TEST    BOARD    ##############################################
+        testboard()
+        ###############################################   END TEST BOARD   ##############################################
+
 
 
 
