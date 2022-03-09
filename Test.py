@@ -1,5 +1,6 @@
 krotka1 = (1, 2, 3)
 krotka2 = (1, 2, 3, 4, 5, 6, 7, 8, 9)
+uuu = 'sadasd'
 
 def czysiezawieraXwY(x, y):
     out = True
