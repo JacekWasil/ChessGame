@@ -4,7 +4,7 @@ from Squares import *  # every square is a class-> example: square.get('b3').squ
 from CreateFigures import figgeneration
 from SquareClick import signebutton, figuremove, movedest
 
-
+gameisstarting = 1
 turn = ' '#who is moving now (White or Black)
 
 
@@ -44,14 +44,15 @@ labellist = {}
 def changeFiguresColour():
     global figureColours, turn
 
+    turn = 'White'
     if figureColours == 'White':
         figureColours = 'Black'
         ChooseColourBtn['text'] = 'Black'
-        turn = 'Black'
+
     else:
         figureColours = 'White'
         ChooseColourBtn['text'] = 'White'
-        turn = 'White'
+
     # Display information who's turn
     turdiplay = Label(text=f" It is {turn} turn", bg='light green')
     turdiplay.place(x=0, y=0)
@@ -78,9 +79,12 @@ def changeFiguresColour():
         ###############################################   END TEST BOARD   ##############################################
 
         fig = globals()[figgeneration(square.get(item).figureColour, square.get(item).figureType, square.get(item).squareColour)]
-        squarebutton[item] = Button(root, text=f'{item}', bg=square.get(f'{item}').squareColour, image = fig, command= lambda x= item, y= turn, z= squarebutton: signebutton(str(x), y, z) and figmove())
+
+        squarebutton[item] = Button(root, text=f'{item}', bg=square.get(f'{item}').squareColour, image = fig, command= lambda x= item, y= squarebutton: signebutton(str(x), y) and figmove())
         squarebutton[item].place(x=square.get(f'{item}').posX, y=square.get(f'{item}').posY)
         item = next(iterator, None)
+
+
 
     ###############################################   TEST    BOARD    ##############################################
     testboard()

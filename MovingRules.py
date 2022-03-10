@@ -25,10 +25,9 @@ def pawnmoveenable(pawnfield, destfield, chessboardstatus):
     # Classic Capturing
     xactuall = pawnfield[:-1]
     xdestiny = destfield[:-1]
-    if ((x.index(xactuall) + 1) or (x.index(xactuall) - 1)) == x.index(xdestiny): #check if destination in x axis is +/- 1
-        print ('a')
+    print(f'{(x.index(xactuall) + 1)} {(x.index(xactuall) - 1)} {x.index(xdestiny)}')
+    if ((x.index(xactuall) + 1) == x.index(xdestiny)) or ((x.index(xactuall) - 1) == x.index(xdestiny)): #check if destination in x axis is +/- 1
         if int(pawnfield[-1:]) + i == int(destfield[-1:]): #check if destination in y axis is +1
-            print('b')
             if pawncolour == 'White' and chessboardstatus.get(destfield).figureColour == 'Black':
                 movepossible = 1
             elif pawncolour == 'Black' and chessboardstatus.get(destfield).figureColour == 'White':

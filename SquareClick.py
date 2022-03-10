@@ -1,18 +1,26 @@
 from Squares import *
 from MovingRules import pawnmoveenable
+#from Board import gameisstarting
 
 lastsigned = '' #last signed square
 actualchoice = '' #actual signed square
 figuremove = [0] #If figure move == 1 then move figure and reset this bit to 0
 movedest = ['','',''] #Which figure move from where to where move figure 0-figure type, 1- from where, 2- to where
-whoturn = ''
-
+whoturn = ' '
+lastsquarecolour = 'light blue'
 
 #Figure signing
-def signebutton(fieldname, whostart, chessboard):
-    global lastsigned, actualchoice, figuremove, movedest, whoturn
-    if whoturn == '':
-        whoturn = whostart
+def signebutton(fieldname, chessboard):
+    global lastsigned, actualchoice, figuremove, movedest, whoturn, lastsquarecolour
+    # Chessboard reset
+
+    if lastsquarecolour != square.get('a1').squareColour:
+        lastsquarecolour = square.get('a1').squareColour
+        whoturn = 'White'
+
+    if whoturn == ' ':
+        whoturn = 'White'
+
 
     if lastsigned == '':
         lastsigned = fieldname
@@ -51,6 +59,7 @@ def signebutton(fieldname, whostart, chessboard):
             whoturn = 'Black'
         else:
             whoturn = 'White'
+
 
     return lastsigned, actualchoice
 
