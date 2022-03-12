@@ -104,15 +104,16 @@ def testboard():
         if square.get(f'{i}').figureColour == ' ' and square.get(f'{i}').figureType == ' ':
             tempfigcolour = tempclear
             tempfigtype = tempclear
-        labellist[i] = Label(text= f'{tempfigcolour} \n{tempfigtype}', bg='light green')
+        labellist[i] = Label(text= f'{tempfigcolour} \n{tempfigtype} \n{square.get(i).pawnDoubleMove}', bg='light green')
         labellist[i].place(x=square.get(f'{i}').posX + 550, y=square.get(f'{i}').posY + 18)
 ###############################################   END TEST BOARD   ##############################################
 
 
 
 #display figure move
+lastDoubleMove = 'a1'
 def figmove():
-    global figuremove, turn
+    global figuremove, turn, lastDoubleMove
 
     if figuremove[0] == 1:
 
@@ -122,7 +123,26 @@ def figmove():
             squarebutton[movedest[1]].config(image=bsquare_img, bg= 'light blue')
         squarebutton[movedest[2]].config(image = img_collection[f'{movedest[0]}'])
 
-        #change figures position in chessboard memory
+        #TODO This function has to be fixed
+        #Delete beating pawn after beating in fly
+        if square.get(lastDoubleMove).pawnDoubleMove:
+            if (movedest[2][:-1]) == (lastDoubleMove[:-1]) and ((turn == 'White' and (int(movedest[2][-1:]) - 1 == int(lastDoubleMove[-1:]))) or (turn == 'Black' and (int(movedest[2][-1:]) + 1 == int(lastDoubleMove[-1:])))):
+                if square.get(lastDoubleMove).squareColour == 'light yellow':
+                    squarebutton[lastDoubleMove].config(image=wsquare_img, bg='light yellow')
+                else:
+                    squarebutton[lastDoubleMove].config(image=wsquare_img, bg='light blue')
+                square.get(lastDoubleMove).figureType = ' '
+                square.get(lastDoubleMove).figureColour = ' '
+
+
+
+
+
+
+
+
+
+        #Change figures position in chessboard memory
         square.get(movedest[1]).figureType = ' '
         square.get(movedest[1]).figureColour = ' '
         square.get(movedest[2]).figureType = movedest[0][1:-4]
@@ -130,6 +150,15 @@ def figmove():
             square.get(movedest[2]).figureColour = 'White'
         else:
             square.get(movedest[2]).figureColour = 'Black'
+
+        # Save double move for pawn in chessboard memory
+        square.get(lastDoubleMove).pawnDoubleMove = 0
+        if movedest[0][1:-4] == 'pawn':
+            if (int(movedest[1][-1:]) + 2 == int(movedest[2][-1:])) or (
+                    int(movedest[1][-1:]) - 2 == int(movedest[2][-1:])):
+                square.get(movedest[2]).pawnDoubleMove = 1
+                lastDoubleMove = movedest[2]
+
 
         figuremove[0] = 0
         if turn == 'White':

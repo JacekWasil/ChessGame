@@ -1,8 +1,9 @@
 figureColours = 'White'
 square = {} #set of all squers from a1 to h8 as a clesses
 
+
 class SquareClass():
-    def __init__(self, name, posX=0, posY=0, squareColour=' ', figureColour=' ', figureType=' ', signed= 0):
+    def __init__(self, name, posX=0, posY=0, squareColour=' ', figureColour=' ', figureType=' ', signed= 0, pawnDoubleMove = 0):
         self.name = name
         self.posX = posX
         self.posY = posY
@@ -10,6 +11,7 @@ class SquareClass():
         self.figureColour = figureColour
         self.figureType = figureType
         self.signed = signed
+        self.pawnDoubleMove = pawnDoubleMove
 
 def squaresPosition():
     global figureColours
