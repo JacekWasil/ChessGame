@@ -3,13 +3,10 @@ from tkinter import *
 from Squares import *  # every square is a class-> example: square.get('b3').squareColour
 from CreateFigures import figgeneration
 from SquareClick import signebutton, figuremove, movedest
+from PopUpFigures import createbuttonspawnatendboard, deletebuttonandpawnchangefig
 
 gameisstarting = 1
 turn = ' '#who is moving now (White or Black)
-
-
-
-
 root = tk.Tk()
 root.geometry('1200x900')
 root.configure(bg="light green")
@@ -95,6 +92,20 @@ ChooseColourBtn = Button(root, text='Start', bg = 'yellow', padx=14, pady=16, co
 ChooseColourBtn.place(x=0, y=50)
 
 
+#TODO finish it - try with root2
+###################################################################################################################################################################
+
+endbuttonknight = Button(root, text='B1', bg='blue', image = wknight_img, padx=14, pady=16, command= lambda: deletebuttonandpawnchangefig('knight', endbuttonknight, endbuttonbishop, endbuttonrook, endbuttonqueen))
+endbuttonbishop = Button(root, text='B1', bg='blue',image = wbishop_img,padx=14, pady=16, command= lambda: deletebuttonandpawnchangefig('bishop',endbuttonknight, endbuttonbishop, endbuttonrook, endbuttonqueen))
+endbuttonrook = Button(root, text='B1', bg='blue', image = wrook_img,padx=14, pady=16, command= lambda: deletebuttonandpawnchangefig('rook', endbuttonknight, endbuttonbishop, endbuttonrook, endbuttonqueen))
+endbuttonqueen = Button(root, text='B1', bg='blue', image = wqueen_img,padx=14, pady=16, command= lambda: deletebuttonandpawnchangefig('queen', endbuttonknight, endbuttonbishop, endbuttonrook, endbuttonqueen))
+
+temporarybutton = Button(root, text='Temporary \n Button', bg = 'red', padx=14, pady=16, command= lambda: createbuttonspawnatendboard(endbuttonknight, endbuttonbishop, endbuttonrook, endbuttonqueen))
+temporarybutton.place(x=800, y=50)
+
+
+###################################################################################################################################################################
+
 ###############################################   TEST    BOARD    ##############################################
 def testboard():
     for i in labellist:
@@ -130,7 +141,7 @@ def figmove():
                 if square.get(lastDoubleMove).squareColour == 'light yellow':
                     squarebutton[lastDoubleMove].config(image=wsquare_img, bg='light yellow')
                 else:
-                    squarebutton[lastDoubleMove].config(image=wsquare_img, bg='light blue')
+                    squarebutton[lastDoubleMove].config(image=bsquare_img, bg='light blue')
                 square.get(lastDoubleMove).figureType = ' '
                 square.get(lastDoubleMove).figureColour = ' '
 

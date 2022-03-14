@@ -13,9 +13,6 @@ lastsquarecolour = 'light blue'
 def signebutton(fieldname, chessboard):
     global lastsigned, actualchoice, figuremove, movedest, whoturn, lastsquarecolour
     # Chessboard reset
-    print('SquareClick:')
-    #print(square.get('a4').pawnDoubleMove)
-    #print(square)
     if lastsquarecolour != square.get('a1').squareColour:
         lastsquarecolour = square.get('a1').squareColour
         whoturn = 'White'
@@ -41,7 +38,6 @@ def signebutton(fieldname, chessboard):
 
 
     #check if move is possible
-    print(square.get('b4').pawnDoubleMove)
     if lastsigned != fieldname and lastsigned != '' and pawnmoveenable(lastsigned, fieldname, square): #warunek pawnmoveenable do zmiany na jakas funkcje zbiorcz
         if whoturn == 'White':
             x = 'w'

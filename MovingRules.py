@@ -32,7 +32,6 @@ def pawnmoveenable(pawnfield, destfield, chessboardstatus):
             elif pawncolour == 'Black' and chessboardstatus.get(destfield).figureColour == 'White':
                 movepossible = 1
 
-    #TODO this option for beating in flight do not work yet
     # Pass over an attacked square
     if ((x.index(xactuall) + 1) == x.index(xdestiny)) or ((x.index(xactuall) - 1) == x.index(xdestiny)): #check if destination in x axis is +/- 1
         if int(pawnfield[-1:]) + i == int(destfield[-1:]): #check if destination in y axis is +1
@@ -42,15 +41,27 @@ def pawnmoveenable(pawnfield, destfield, chessboardstatus):
                 checkPawnSquareNameLeft = (f'{(x[(x.index(xactuall) - 1)])}{pawnfield[-1:]}')
                 if pawncolour == 'White':
                     # Check if next to pawn is standing another pawn with opposit colour
-                    if chessboardstatus.get(checkPawnSquareNameRight).figureColour == 'Black' or chessboardstatus.get(checkPawnSquareNameLeft).figureColour == 'Black':
+                    if chessboardstatus.get(
+                            checkPawnSquareNameRight).figureColour == 'Black' or chessboardstatus.get(
+                            checkPawnSquareNameLeft).figureColour == 'Black':
                         # Check if next to pawn is standing another pawn after double move
                         if chessboardstatus.get(checkPawnSquareNameRight).pawnDoubleMove or chessboardstatus.get(checkPawnSquareNameLeft).pawnDoubleMove:
+                            movepossible = 1
+                if pawncolour == 'Black':
+                    # Check if next to pawn is standing another pawn with opposit colour
+                    if chessboardstatus.get(
+                            checkPawnSquareNameRight).figureColour == 'White' or chessboardstatus.get(
+                            checkPawnSquareNameLeft).figureColour == 'White':
+                        # Check if next to pawn is standing another pawn after double move
+                        if chessboardstatus.get(
+                                checkPawnSquareNameRight).pawnDoubleMove or chessboardstatus.get(
+                                checkPawnSquareNameLeft).pawnDoubleMove:
                             movepossible = 1
 
 
 
 
-                        #movepossible = 1
+
 
 
 
