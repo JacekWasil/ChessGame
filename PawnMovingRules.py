@@ -1,6 +1,4 @@
-print('MovingRules:')
-#from Board import abc
-
+print('PawnMovingRules:')
 
 def pawnmoveenable(pawnfield, destfield, chessboardstatus):
     x = ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h') # x axis fields
@@ -48,7 +46,7 @@ def pawnmoveenable(pawnfield, destfield, chessboardstatus):
                         if chessboardstatus.get(checkPawnSquareNameRight).pawnDoubleMove or chessboardstatus.get(checkPawnSquareNameLeft).pawnDoubleMove:
                             movepossible = 1
                 if pawncolour == 'Black':
-                    # Check if next to pawn is standing another pawn with opposit colour
+                    # Check if next to pawn is standing another pawn with opposite colour
                     if chessboardstatus.get(
                             checkPawnSquareNameRight).figureColour == 'White' or chessboardstatus.get(
                             checkPawnSquareNameLeft).figureColour == 'White':

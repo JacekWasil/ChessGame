@@ -1,5 +1,5 @@
-from MovingRules import pawnmoveenable
-from Squares import *
+from PawnMovingRules import pawnmoveenable
+from SquareGeneration import *
 
 
 lastsigned = '' #last signed square

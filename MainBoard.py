@@ -1,9 +1,10 @@
 import tkinter as tk
 from tkinter import *
-from Squares import *  # every square is a class-> example: square.get('b3').squareColour
-from CreateFigures import figgeneration
-from SquareClick import signebutton, figuremove, movedest
-from PopUpFigures import createbuttonspawnatendboard, deletebuttonandpawnchangefig
+from SquareGeneration import *  # every square is a class-> example: square.get('b3').squareColour
+from CreateFiguresImages import figgeneration
+from FigureSigning import signebutton, figuremove, movedest
+from PopUpFiguresWhenPawnAtEnd import showbuttonspawnatendboard, choosebuttonandpawnchangefig
+
 
 gameisstarting = 1
 turn = ' '#who is moving now (White or Black)
@@ -11,6 +12,7 @@ root = tk.Tk()
 root.geometry('1200x900')
 root.configure(bg="light green")
 squarebutton = {} #collected all squares buttons
+
 
 #Generate figures images
 wpawn_img = PhotoImage(file=f'Figure/w_pawn.png')
@@ -32,6 +34,21 @@ img_collection = {'wpawn_img' : wpawn_img, 'wrook_img' : wrook_img, 'wknight_img
                   'wking_img' : wking_img, 'bpawn_img' : bpawn_img, 'brook_img' : brook_img, 'bknight_img' : bknight_img, 'bbishop_img' : bbishop_img,
                   'bqueen_img' : bqueen_img, 'bking_img' : bking_img, 'wsquare_img' : wsquare_img, 'bsquare_img' : bsquare_img}
 
+endbuttonknight = Button(root, bg='red', command=lambda: figmove(choosebuttonandpawnchangefig('knight', endbuttonknight,
+                                                                                           endbuttonbishop,
+                                                                                           endbuttonrook,
+                                                                                           endbuttonqueen)))
+endbuttonbishop = Button(root, bg='red', command=lambda: figmove(choosebuttonandpawnchangefig('bishop', endbuttonknight,
+                                                                                           endbuttonbishop,
+                                                                                           endbuttonrook,
+                                                                                           endbuttonqueen)))
+endbuttonrook = Button(root, bg='red', command=lambda: figmove(choosebuttonandpawnchangefig('rook', endbuttonknight,
+                                                                                         endbuttonbishop, endbuttonrook,
+                                                                                         endbuttonqueen)))
+endbuttonqueen = Button(root,  bg='red', command=lambda: figmove(choosebuttonandpawnchangefig('queen', endbuttonknight,
+                                                                                          endbuttonbishop,
+                                                                                          endbuttonrook,
+                                                                                          endbuttonqueen)))
 
 ###############################################   TEST    BOARD    ##############################################
 labellist = {}
@@ -84,24 +101,12 @@ def changeFiguresColour():
 
 
     ###############################################   TEST    BOARD    ##############################################
-    testboard()
+    #testboard()
     ###############################################   END TEST BOARD   ##############################################
 
 
 ChooseColourBtn = Button(root, text='Start', bg = 'yellow', padx=14, pady=16, command=changeFiguresColour)
 ChooseColourBtn.place(x=0, y=50)
-
-
-#TODO finish it - try with root2
-###################################################################################################################################################################
-
-endbuttonknight = Button(root, text='B1', bg='blue', image = wknight_img, padx=14, pady=16, command= lambda: deletebuttonandpawnchangefig('knight', endbuttonknight, endbuttonbishop, endbuttonrook, endbuttonqueen))
-endbuttonbishop = Button(root, text='B1', bg='blue',image = wbishop_img,padx=14, pady=16, command= lambda: deletebuttonandpawnchangefig('bishop',endbuttonknight, endbuttonbishop, endbuttonrook, endbuttonqueen))
-endbuttonrook = Button(root, text='B1', bg='blue', image = wrook_img,padx=14, pady=16, command= lambda: deletebuttonandpawnchangefig('rook', endbuttonknight, endbuttonbishop, endbuttonrook, endbuttonqueen))
-endbuttonqueen = Button(root, text='B1', bg='blue', image = wqueen_img,padx=14, pady=16, command= lambda: deletebuttonandpawnchangefig('queen', endbuttonknight, endbuttonbishop, endbuttonrook, endbuttonqueen))
-
-temporarybutton = Button(root, text='Temporary \n Button', bg = 'red', padx=14, pady=16, command= lambda: createbuttonspawnatendboard(endbuttonknight, endbuttonbishop, endbuttonrook, endbuttonqueen))
-temporarybutton.place(x=800, y=50)
 
 
 ###################################################################################################################################################################
@@ -123,9 +128,10 @@ def testboard():
 
 #display figure move
 lastDoubleMove = 'a1'
-def figmove():
-    global figuremove, turn, lastDoubleMove
-
+waitforfigurechoose = 0
+pawnpositionforupgrate = 'Inicialize'
+def figmove(chosenfigureendboard = ' '):
+    global figuremove, turn, lastDoubleMove, waitforfigurechoose, pawnpositionforupgrate, figurechoosenatendofboard
     if figuremove[0] == 1:
 
         if square.get(movedest[1]).squareColour == 'light yellow':
@@ -134,7 +140,6 @@ def figmove():
             squarebutton[movedest[1]].config(image=bsquare_img, bg= 'light blue')
         squarebutton[movedest[2]].config(image = img_collection[f'{movedest[0]}'])
 
-        #TODO This function has to be fixed
         #Delete beating pawn after beating in fly
         if square.get(lastDoubleMove).pawnDoubleMove:
             if (movedest[2][:-1]) == (lastDoubleMove[:-1]) and ((turn == 'White' and (int(movedest[2][-1:]) - 1 == int(lastDoubleMove[-1:]))) or (turn == 'Black' and (int(movedest[2][-1:]) + 1 == int(lastDoubleMove[-1:])))):
@@ -144,14 +149,6 @@ def figmove():
                     squarebutton[lastDoubleMove].config(image=bsquare_img, bg='light blue')
                 square.get(lastDoubleMove).figureType = ' '
                 square.get(lastDoubleMove).figureColour = ' '
-
-
-
-
-
-
-
-
 
         #Change figures position in chessboard memory
         square.get(movedest[1]).figureType = ' '
@@ -170,35 +167,46 @@ def figmove():
                 square.get(movedest[2]).pawnDoubleMove = 1
                 lastDoubleMove = movedest[2]
 
+        #show 4 figures to chose after pawn reach end position
+        if movedest[0][1:-4] == 'pawn' and (movedest[2][-1:] == '1' or movedest[2][-1:] == '8') and waitforfigurechoose == 0 :
+            whiteorblack = movedest[0][0]
+            endbuttonknight.config(image=globals()[f'{whiteorblack}knight_img'])
+            endbuttonbishop.config(image = globals()[f'{whiteorblack}bishop_img'])
+            endbuttonrook.config(image = globals()[f'{whiteorblack}rook_img'])
+            endbuttonqueen.config(image = globals()[f'{whiteorblack}queen_img'])
+            showbuttonspawnatendboard(endbuttonknight, endbuttonbishop, endbuttonrook, endbuttonqueen)
+            pawnpositionforupgrate = movedest[2]
+            waitforfigurechoose = 1
 
-        figuremove[0] = 0
-        if turn == 'White':
-            turn = 'Black'
-        else:
-            turn = 'White'
+        # change pawn to choosen figure
+        if chosenfigureendboard != ' ' and waitforfigurechoose == 1:
+            squarebutton[pawnpositionforupgrate].config(image=globals()[f'{turn[:-4].lower()}{chosenfigureendboard}_img'])
+            #change position in board memory
+            square.get(pawnpositionforupgrate).figureType = chosenfigureendboard
+            waitforfigurechoose = 0
+
+        if waitforfigurechoose == 0:
+            figuremove[0] = 0
+            if turn == 'White':
+                turn = 'Black'
+            else:
+                turn = 'White'
+
+
         turdiplay = Label(text=f" It is {turn} turn", bg='light green')
         turdiplay.place(x=0, y=0)
 
         ###############################################   TEST    BOARD    ##############################################
-        testboard()
+        #testboard()
         ###############################################   END TEST BOARD   ##############################################
 
 
 
 
-
-
-
-
-
-
-
-###############
-
 #TODO
 # print(square.get('a1').squareColour)
 # WhitePawn1.place(x=square.get('a1').posX, y=square.get('a1').posY)
-# dupa = PhotoImage(file=f'Figure/w_queen.png')
+# testboard() - shows test board with date about the board (called in 2 places)
 
 
 root.mainloop()
