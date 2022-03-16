@@ -12,6 +12,12 @@ lastsquarecolour = 'light blue'
 #Figure signing
 def signebutton(fieldname, chessboard):
     global lastsigned, actualchoice, figuremove, movedest, whoturn, lastsquarecolour
+    # Block signing if pawn is at end of board and is not changed to figure
+    donotsignfigure = 0
+    for i in ('a', 'b','c','d','e','f','g','h'):
+        if square.get(f'{i}1').figureType == 'pawn' or square.get(f'{i}8').figureType == 'pawn':
+            donotsignfigure = 1
+
     # Chessboard reset
     if lastsquarecolour != square.get('a1').squareColour:
         lastsquarecolour = square.get('a1').squareColour
@@ -20,11 +26,10 @@ def signebutton(fieldname, chessboard):
     if whoturn == ' ':
         whoturn = 'White'
 
-
     if lastsigned == '':
         lastsigned = fieldname
 
-    if (whoturn == 'White' and square.get(fieldname).figureColour == 'White') or (whoturn == 'Black' and square.get(fieldname).figureColour == 'Black'):
+    if donotsignfigure == 0 and ((whoturn == 'White' and square.get(fieldname).figureColour == 'White') or (whoturn == 'Black' and square.get(fieldname).figureColour == 'Black')):
         actualchoice = fieldname
         square.get(fieldname).signed = 1
         chessboard[fieldname].config(bg='yellow')
@@ -32,13 +37,11 @@ def signebutton(fieldname, chessboard):
             square.get(lastsigned).signed = 0
             chessboard[lastsigned].config(bg=f'{square.get(lastsigned).squareColour}')
 
-
-    if actualchoice != lastsigned:
+    if actualchoice != lastsigned and donotsignfigure == 0:
         lastsigned = square.get(fieldname).name
 
-
     #check if move is possible
-    if lastsigned != fieldname and lastsigned != '' and pawnmoveenable(lastsigned, fieldname, square): #warunek pawnmoveenable do zmiany na jakas funkcje zbiorcz
+    if donotsignfigure == 0 and lastsigned != fieldname and lastsigned != '' and pawnmoveenable(lastsigned, fieldname, square): #warunek pawnmoveenable do zmiany na jakas funkcje zbiorcz
         if whoturn == 'White':
             x = 'w'
         else:
@@ -57,7 +60,6 @@ def signebutton(fieldname, chessboard):
             whoturn = 'Black'
         else:
             whoturn = 'White'
-
 
     return lastsigned, actualchoice
 

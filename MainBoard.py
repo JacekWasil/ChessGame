@@ -56,7 +56,15 @@ labellist = {}
 
 #print (square.get('a1').squareColour)
 def changeFiguresColour():
-    global figureColours, turn
+    global figureColours, turn, waitforfigurechoose
+    #reset basic values
+    waitforfigurechoose = 0
+    figuremove[0] = 0
+    endbuttonknight.place(x=-100, y=600)
+    endbuttonbishop.place(x=-100, y=600)
+    endbuttonrook.place(x=-100, y=600)
+    endbuttonqueen.place(x=-100, y=600)
+
 
     turn = 'White'
     if figureColours == 'White':
