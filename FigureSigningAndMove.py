@@ -1,4 +1,5 @@
-from PawnMovingRules import pawnmoveenable
+from PawnMovingRules import pawn_move_enable
+from KnightMovingRules import knight_move_enable
 from SquareGeneration import *
 
 
@@ -41,7 +42,10 @@ def signebutton(fieldname, chessboard):
         lastsigned = square.get(fieldname).name
 
     #check if move is possible
-    if donotsignfigure == 0 and lastsigned != fieldname and lastsigned != '' and pawnmoveenable(lastsigned, fieldname, square): #warunek pawnmoveenable do zmiany na jakas funkcje zbiorcz
+    if donotsignfigure == 0 and lastsigned != fieldname and lastsigned != '' and \
+            ((square.get(lastsigned).figureType == 'pawn' and pawn_move_enable(lastsigned, fieldname, square)) or
+             (square.get(lastsigned).figureType == 'knight' and knight_move_enable(lastsigned, fieldname, square)) or
+             square.get(lastsigned).figureType != 'pawn' and square.get(lastsigned).figureType != 'knight'): #pawn and knight ready
         if whoturn == 'White':
             x = 'w'
         else:

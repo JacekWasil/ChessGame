@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import *
 from SquareGeneration import *  # every square is a class-> example: square.get('b3').squareColour
 from CreateFiguresImages import figgeneration
-from FigureSigning import signebutton, figuremove, movedest
+from FigureSigningAndMove import signebutton, figuremove, movedest
 from PopUpFiguresWhenPawnAtEnd import showbuttonspawnatendboard, choosebuttonandpawnchangefig
 
 

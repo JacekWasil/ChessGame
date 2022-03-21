@@ -1,6 +1,6 @@
 print('PawnMovingRules:')
 
-def pawnmoveenable(pawnfield, destfield, chessboardstatus):
+def pawn_move_enable(pawnfield, destfield, chessboardstatus):
     x = ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h') # x axis fields
     #y = ('1', '2', '3', '4', '5', '6', '7', '8') # y axis fields
 
