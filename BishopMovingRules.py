@@ -27,4 +27,7 @@ def bishop_move_enable(bishopfield, destField, chessBoardStatus):
                 movePossible = 0
                 break
 
-    return  movePossible
+    if chessBoardStatus.get(destField).figureType == 'king':
+        movePossible = 0
+
+    return movePossible
