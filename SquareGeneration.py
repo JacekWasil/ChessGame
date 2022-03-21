@@ -13,7 +13,7 @@ class SquareClass():
         self.signed = signed
         self.pawnDoubleMove = pawnDoubleMove
 
-def squaresPosition():
+def squares_position():
     global figureColours
     i = 1
     if figureColours == 'White':
@@ -130,9 +130,9 @@ def squaresPosition():
 
         i += 1
 
-squaresPosition()
+squares_position()
 
-def squaredescrpt(figcol = '', item = '', text='', posx= 0, posy= 0, create= 0):
+def square_description(figcol ='', item ='', text='', posx= 0, posy= 0, create= 0):
     text = '  '
     if figcol == 'White':
         if item in {'a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8'}:

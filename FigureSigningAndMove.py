@@ -1,5 +1,6 @@
 from PawnMovingRules import pawn_move_enable
 from KnightMovingRules import knight_move_enable
+from BishopMovingRules import bishop_move_enable
 from SquareGeneration import *
 
 
@@ -11,7 +12,7 @@ whoturn = ' '
 lastsquarecolour = 'light blue'
 
 #Figure signing
-def signebutton(fieldname, chessboard):
+def sign_button(fieldname, chessboard):
     global lastsigned, actualchoice, figuremove, movedest, whoturn, lastsquarecolour
     # Block signing if pawn is at end of board and is not changed to figure
     donotsignfigure = 0
@@ -45,7 +46,8 @@ def signebutton(fieldname, chessboard):
     if donotsignfigure == 0 and lastsigned != fieldname and lastsigned != '' and \
             ((square.get(lastsigned).figureType == 'pawn' and pawn_move_enable(lastsigned, fieldname, square)) or
              (square.get(lastsigned).figureType == 'knight' and knight_move_enable(lastsigned, fieldname, square)) or
-             square.get(lastsigned).figureType != 'pawn' and square.get(lastsigned).figureType != 'knight'): #pawn and knight ready
+             (square.get(lastsigned).figureType == 'bishop' and bishop_move_enable(lastsigned, fieldname, square)) or
+             square.get(lastsigned).figureType != 'pawn' and square.get(lastsigned).figureType != 'knight' and square.get(lastsigned).figureType != 'bishop'): #pawn, knight and bishop ready
         if whoturn == 'White':
             x = 'w'
         else:

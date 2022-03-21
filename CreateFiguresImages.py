@@ -1,4 +1,4 @@
-def figgeneration(colour='', figtype='', squarecolour = '', figimg=''):
+def figure_image_generation(colour='', figtype='', squarecolour ='', figimg=''):
     if colour == 'White':
         if figtype == 'pawn':
             figimg = 'wpawn_img'

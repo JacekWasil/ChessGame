@@ -1,9 +1,9 @@
 import tkinter as tk
 from tkinter import *
 from SquareGeneration import *  # every square is a class-> example: square.get('b3').squareColour
-from CreateFiguresImages import figgeneration
-from FigureSigningAndMove import signebutton, figuremove, movedest
-from PopUpFiguresWhenPawnAtEnd import showbuttonspawnatendboard, choosebuttonandpawnchangefig
+from CreateFiguresImages import figure_image_generation
+from FigureSigningAndMove import sign_button, figuremove, movedest
+from PopUpFiguresWhenPawnAtEnd import show_buttons_pawn_at_end_board, choose_button_and_pawn_change_to_figure
 
 
 gameisstarting = 1
@@ -34,28 +34,28 @@ img_collection = {'wpawn_img' : wpawn_img, 'wrook_img' : wrook_img, 'wknight_img
                   'wking_img' : wking_img, 'bpawn_img' : bpawn_img, 'brook_img' : brook_img, 'bknight_img' : bknight_img, 'bbishop_img' : bbishop_img,
                   'bqueen_img' : bqueen_img, 'bking_img' : bking_img, 'wsquare_img' : wsquare_img, 'bsquare_img' : bsquare_img}
 
-endbuttonknight = Button(root, bg='red', command=lambda: figmove(choosebuttonandpawnchangefig('knight', endbuttonknight,
-                                                                                           endbuttonbishop,
-                                                                                           endbuttonrook,
-                                                                                           endbuttonqueen)))
-endbuttonbishop = Button(root, bg='red', command=lambda: figmove(choosebuttonandpawnchangefig('bishop', endbuttonknight,
-                                                                                           endbuttonbishop,
-                                                                                           endbuttonrook,
-                                                                                           endbuttonqueen)))
-endbuttonrook = Button(root, bg='red', command=lambda: figmove(choosebuttonandpawnchangefig('rook', endbuttonknight,
-                                                                                         endbuttonbishop, endbuttonrook,
-                                                                                         endbuttonqueen)))
-endbuttonqueen = Button(root,  bg='red', command=lambda: figmove(choosebuttonandpawnchangefig('queen', endbuttonknight,
-                                                                                          endbuttonbishop,
-                                                                                          endbuttonrook,
-                                                                                          endbuttonqueen)))
+endbuttonknight = Button(root, bg='red', command=lambda: figure_move(choose_button_and_pawn_change_to_figure('knight', endbuttonknight,
+                                                                                                             endbuttonbishop,
+                                                                                                             endbuttonrook,
+                                                                                                             endbuttonqueen)))
+endbuttonbishop = Button(root, bg='red', command=lambda: figure_move(choose_button_and_pawn_change_to_figure('bishop', endbuttonknight,
+                                                                                                             endbuttonbishop,
+                                                                                                             endbuttonrook,
+                                                                                                             endbuttonqueen)))
+endbuttonrook = Button(root, bg='red', command=lambda: figure_move(choose_button_and_pawn_change_to_figure('rook', endbuttonknight,
+                                                                                                           endbuttonbishop, endbuttonrook,
+                                                                                                           endbuttonqueen)))
+endbuttonqueen = Button(root,  bg='red', command=lambda: figure_move(choose_button_and_pawn_change_to_figure('queen', endbuttonknight,
+                                                                                                             endbuttonbishop,
+                                                                                                             endbuttonrook,
+                                                                                                             endbuttonqueen)))
 
 ###############################################   TEST    BOARD    ##############################################
 labellist = {}
 ###############################################   END TEST BOARD   ##############################################
 
 #print (square.get('a1').squareColour)
-def changeFiguresColour():
+def change_figure_colour():
     global figureColours, turn, waitforfigurechoose
     #reset basic values
     waitforfigurechoose = 0
@@ -79,7 +79,7 @@ def changeFiguresColour():
     turdiplay = Label(text=f" It is {turn} turn", bg='light green')
     turdiplay.place(x=0, y=0)
 
-    squaresPosition()
+    squares_position()
 
     # place squares with right names on the board position (example: a1 is a button set as a square)
     iterator = iter(square)
@@ -88,7 +88,7 @@ def changeFiguresColour():
     #Set figures on the board
     for x in range(64):
         #Write field names on left and on bottom side of chessboard
-        (txt, posx, posy, create) = squaredescrpt(figureColours, item)
+        (txt, posx, posy, create) = square_description(figureColours, item)
         if create == 1:
             text = Label(text=f"{txt}", bg='light green')
             text.place(x=posx, y=posy)
@@ -100,9 +100,9 @@ def changeFiguresColour():
         labellist[f'{item}'] = item
         ###############################################   END TEST BOARD   ##############################################
 
-        fig = globals()[figgeneration(square.get(item).figureColour, square.get(item).figureType, square.get(item).squareColour)]
+        fig = globals()[figure_image_generation(square.get(item).figureColour, square.get(item).figureType, square.get(item).squareColour)]
 
-        squarebutton[item] = Button(root, text=f'{item}', bg=square.get(f'{item}').squareColour, image = fig, command= lambda x= item, y= squarebutton: signebutton(str(x), y) and figmove())
+        squarebutton[item] = Button(root, text=f'{item}', bg=square.get(f'{item}').squareColour, image = fig, command= lambda x= item, y= squarebutton: sign_button(str(x), y) and figure_move())
         squarebutton[item].place(x=square.get(f'{item}').posX, y=square.get(f'{item}').posY)
         item = next(iterator, None)
 
@@ -113,14 +113,14 @@ def changeFiguresColour():
     ###############################################   END TEST BOARD   ##############################################
 
 
-ChooseColourBtn = Button(root, text='Start', bg = 'yellow', padx=14, pady=16, command=changeFiguresColour)
+ChooseColourBtn = Button(root, text='Start', bg = 'yellow', padx=14, pady=16, command=change_figure_colour)
 ChooseColourBtn.place(x=0, y=50)
 
 
 ###################################################################################################################################################################
 
 ###############################################   TEST    BOARD    ##############################################
-def testboard():
+def test_board():
     for i in labellist:
         tempclear = '          '
         tempfigcolour = square.get(f'{i}').figureColour
@@ -138,7 +138,7 @@ def testboard():
 lastDoubleMove = 'a1'
 waitforfigurechoose = 0
 pawnpositionforupgrate = 'Inicialize'
-def figmove(chosenfigureendboard = ' '):
+def figure_move(chosenfigureendboard =' '):
     global figuremove, turn, lastDoubleMove, waitforfigurechoose, pawnpositionforupgrate, figurechoosenatendofboard
     if figuremove[0] == 1:
 
@@ -182,7 +182,7 @@ def figmove(chosenfigureendboard = ' '):
             endbuttonbishop.config(image = globals()[f'{whiteorblack}bishop_img'])
             endbuttonrook.config(image = globals()[f'{whiteorblack}rook_img'])
             endbuttonqueen.config(image = globals()[f'{whiteorblack}queen_img'])
-            showbuttonspawnatendboard(endbuttonknight, endbuttonbishop, endbuttonrook, endbuttonqueen)
+            show_buttons_pawn_at_end_board(endbuttonknight, endbuttonbishop, endbuttonrook, endbuttonqueen)
             pawnpositionforupgrate = movedest[2]
             waitforfigurechoose = 1
 
