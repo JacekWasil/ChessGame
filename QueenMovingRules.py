@@ -31,9 +31,10 @@ def queen_move_enable(queenField, destField, chessBoardStatus):
                 break
 
     #movement like bishop:
-    if actuallSquareColour == destFieldColour and queenColour != figureColourOnDestField and queenField[
-                                                                                              :-1] != destField[
-                                                                                                      :-1]:  # check if destination square is the same colour and figure on dest field is different colour or empty
+    xMovingDirection = 0  # 1: right, -1: left (a-b-c...)
+    yMovingDirection = 0  # 1: up, -1: down (1-2-3...)
+    memoryForMovingField = queenField
+    if actuallSquareColour == destFieldColour and queenColour != figureColourOnDestField and queenField[:-1] != destField[:-1]:  # check if destination square is the same colour and figure on dest field is different colour or empty
         if int(destField[-1:]) < int(queenField[-1:]):
             yMovingDirection = -1
         if int(destField[-1:]) > int(queenField[-1:]):
