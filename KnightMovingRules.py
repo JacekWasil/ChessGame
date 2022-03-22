@@ -14,4 +14,7 @@ def knight_move_enable(knightfield, destField, chessBoardStatus):
             if knightColour != figureColourOnDestField: #if figure colour on dest field is different than knight colour
                 movePossible = 1
 
+    if chessBoardStatus.get(destField).figureType == 'king':
+        movePossible = 0
+
     return  movePossible

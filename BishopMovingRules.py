@@ -1,4 +1,3 @@
-
 def bishop_move_enable(bishopfield, destField, chessBoardStatus):
     movePossible = 0
     xAxisBoard = ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h')  # x axis fields
@@ -7,7 +6,7 @@ def bishop_move_enable(bishopfield, destField, chessBoardStatus):
     actuallSquareColour = chessBoardStatus.get(bishopfield).squareColour
     destFieldColour = chessBoardStatus.get(destField).squareColour
     bishopXIndexField = xAxisBoard.index(bishopfield[:-1])
-    xMovingDirection = 1 # 1: right, -1: left (a-b-c...)
+    xMovingDirection = 1  # 1: right, -1: left (a-b-c...)
     yMovingDirection = 1  # 1: up, -1: down (1-2-3...)
     memoryForMovingField = bishopfield
     if actuallSquareColour == destFieldColour and bishopColour != figureColourOnDestField and bishopfield[:-1] != destField[:-1]: #check if destination square is the same colour and figure on dest field is different colour or empty

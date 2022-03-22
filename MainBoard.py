@@ -5,14 +5,12 @@ from CreateFiguresImages import figure_image_generation
 from FigureSigningAndMove import sign_button, figuremove, movedest
 from PopUpFiguresWhenPawnAtEnd import show_buttons_pawn_at_end_board, choose_button_and_pawn_change_to_figure
 
-
 gameisstarting = 1
 turn = ' '#who is moving now (White or Black)
 root = tk.Tk()
 root.geometry('1200x900')
 root.configure(bg="light green")
 squarebutton = {} #collected all squares buttons
-
 
 #Generate figures images
 wpawn_img = PhotoImage(file=f'Figure/w_pawn.png')
@@ -64,9 +62,8 @@ def change_figure_colour():
     endbuttonbishop.place(x=-100, y=600)
     endbuttonrook.place(x=-100, y=600)
     endbuttonqueen.place(x=-100, y=600)
-
-
     turn = 'White'
+
     if figureColours == 'White':
         figureColours = 'Black'
         ChooseColourBtn['text'] = 'Black'
@@ -106,8 +103,6 @@ def change_figure_colour():
         squarebutton[item].place(x=square.get(f'{item}').posX, y=square.get(f'{item}').posY)
         item = next(iterator, None)
 
-
-
     ###############################################   TEST    BOARD    ##############################################
     #testboard()
     ###############################################   END TEST BOARD   ##############################################
@@ -115,9 +110,6 @@ def change_figure_colour():
 
 ChooseColourBtn = Button(root, text='Start', bg = 'yellow', padx=14, pady=16, command=change_figure_colour)
 ChooseColourBtn.place(x=0, y=50)
-
-
-###################################################################################################################################################################
 
 ###############################################   TEST    BOARD    ##############################################
 def test_board():
@@ -132,10 +124,8 @@ def test_board():
         labellist[i].place(x=square.get(f'{i}').posX + 550, y=square.get(f'{i}').posY + 18)
 ###############################################   END TEST BOARD   ##############################################
 
-
-
 #display figure move
-lastDoubleMove = 'a1'
+lastDoubleMove = 'a1' # Inicialize
 waitforfigurechoose = 0
 pawnpositionforupgrate = 'Inicialize'
 def figure_move(chosenfigureendboard =' '):
@@ -200,21 +190,11 @@ def figure_move(chosenfigureendboard =' '):
             else:
                 turn = 'White'
 
-
         turdiplay = Label(text=f" It is {turn} turn", bg='light green')
         turdiplay.place(x=0, y=0)
 
         ###############################################   TEST    BOARD    ##############################################
         #testboard()
         ###############################################   END TEST BOARD   ##############################################
-
-
-
-
-#TODO
-# print(square.get('a1').squareColour)
-# WhitePawn1.place(x=square.get('a1').posX, y=square.get('a1').posY)
-# testboard() - shows test board with date about the board (called in 2 places)
-
 
 root.mainloop()
