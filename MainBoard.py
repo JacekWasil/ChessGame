@@ -101,7 +101,11 @@ def change_figure_colour():
 
         squarebutton[item] = Button(root, text=f'{item}', bg=square.get(f'{item}').squareColour, image = fig, command= lambda x= item, y= squarebutton: sign_button(str(x), y) and figure_move())
         squarebutton[item].place(x=square.get(f'{item}').posX, y=square.get(f'{item}').posY)
+        if item == 'a1' or  item == 'e1' or item == 'h1' or item == 'a8' or  item == 'e8' or item == 'h8':
+            square.get(f'{item}').castlePossible = 1
         item = next(iterator, None)
+
+
 
     ###############################################   TEST    BOARD    ##############################################
     #testboard()
@@ -148,6 +152,55 @@ def figure_move(chosenfigureendboard =' '):
                 square.get(lastDoubleMove).figureType = ' '
                 square.get(lastDoubleMove).figureColour = ' '
 
+        #Castle - change rook position
+        if movedest[0][1:-4] == 'king' and f'{movedest[1][:-1]}' == 'e':
+            if f'{movedest[2][:-1]}' == 'c':
+                if turn == 'White':
+                    square.get('e1').castlePossible = 0
+                    squarebutton['d1'].config(image=wrook_img)
+                    square.get('d1').figureType = 'rook'
+                    square.get('d1').figureColour = 'White'
+                    if square.get('a1').squareColour == 'light yellow':
+                        squarebutton['a1'].config(image=wsquare_img)
+                    else:
+                        squarebutton['a1'].config(image=bsquare_img)
+                    square.get('a1').figureType = ' '
+                    square.get('a1').figureColour = ' '
+                if turn == 'Black':
+                    square.get('e8').castlePossible = 0
+                    squarebutton['d8'].config(image=brook_img)
+                    square.get('d8').figureType = 'rook'
+                    square.get('d8').figureColour = 'Black'
+                    if square.get('a8').squareColour == 'light yellow':
+                        squarebutton['a8'].config(image=wsquare_img)
+                    else:
+                        squarebutton['a8'].config(image=bsquare_img)
+                    square.get('a8').figureType = ' '
+                    square.get('a8').figureColour = ' '
+            if f'{movedest[2][:-1]}' == 'g':
+                if turn == 'White':
+                    square.get('e1').castlePossible = 0
+                    squarebutton['f1'].config(image=wrook_img)
+                    square.get('f1').figureType = 'rook'
+                    square.get('f1').figureColour = 'White'
+                    if square.get('h1').squareColour == 'light yellow':
+                        squarebutton['h1'].config(image=wsquare_img)
+                    else:
+                        squarebutton['h1'].config(image=bsquare_img)
+                    square.get('h1').figureType = ' '
+                    square.get('h1').figureColour = ' '
+                if turn == 'Black':
+                    square.get('e8').castlePossible = 0
+                    squarebutton['f8'].config(image=brook_img)
+                    square.get('f8').figureType = 'rook'
+                    square.get('f8').figureColour = 'Black'
+                    if square.get('h8').squareColour == 'light yellow':
+                        squarebutton['h8'].config(image=wsquare_img)
+                    else:
+                        squarebutton['h8'].config(image=bsquare_img)
+                    square.get('h8').figureType = ' '
+                    square.get('h8').figureColour = ' '
+
         #Change figures position in chessboard memory
         square.get(movedest[1]).figureType = ' '
         square.get(movedest[1]).figureColour = ' '
@@ -175,6 +228,7 @@ def figure_move(chosenfigureendboard =' '):
             show_buttons_pawn_at_end_board(endbuttonknight, endbuttonbishop, endbuttonrook, endbuttonqueen)
             pawnpositionforupgrate = movedest[2]
             waitforfigurechoose = 1
+
 
         # change pawn to choosen figure
         if chosenfigureendboard != ' ' and waitforfigurechoose == 1:

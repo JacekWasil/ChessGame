@@ -40,7 +40,8 @@ def pawn_move_enable(pawnfield, destField, chessBoardStatus):
                             checkPawnSquareNameRight).figureColour == 'Black' or chessBoardStatus.get(
                             checkPawnSquareNameLeft).figureColour == 'Black':
                         # Check if next to pawn is standing another pawn after double move
-                        if chessBoardStatus.get(checkPawnSquareNameRight).pawnDoubleMove or chessBoardStatus.get(checkPawnSquareNameLeft).pawnDoubleMove:
+                        if chessBoardStatus.get(checkPawnSquareNameRight).pawnDoubleMove or \
+                                chessBoardStatus.get(checkPawnSquareNameLeft).pawnDoubleMove:
                             movePossible = 1
                 if pawncolour == 'Black':
                     # Check if next to pawn is standing another pawn with opposite colour
