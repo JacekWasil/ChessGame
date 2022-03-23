@@ -1,5 +1,6 @@
 
 def rook_move_enable(rookField, destField, chessBoardStatus):
+    check = 0
     movePossible = 0
     xAxisBoard = ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h')  # x axis fields
     rookColour = chessBoardStatus.get(rookField).figureColour
@@ -25,7 +26,8 @@ def rook_move_enable(rookField, destField, chessBoardStatus):
                 movePossible = 0
                 break
 
-    if chessBoardStatus.get(destField).figureType == 'king':
+    if chessBoardStatus.get(destField).figureType == 'king' and movePossible:
         movePossible = 0
+        check = 1
 
-    return movePossible
+    return movePossible, check

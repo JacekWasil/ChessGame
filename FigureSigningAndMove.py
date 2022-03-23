@@ -47,11 +47,11 @@ def sign_button(fieldname, chessboard):
 
     #check if move is possible
     if donotsignfigure == 0 and lastsigned != fieldname and lastsigned != '' and \
-            ((square.get(lastsigned).figureType == 'pawn' and pawn_move_enable(lastsigned, fieldname, square)) or
-             (square.get(lastsigned).figureType == 'knight' and knight_move_enable(lastsigned, fieldname, square)) or
-             (square.get(lastsigned).figureType == 'bishop' and bishop_move_enable(lastsigned, fieldname, square)) or
-             (square.get(lastsigned).figureType == 'rook' and rook_move_enable(lastsigned, fieldname, square)) or
-             (square.get(lastsigned).figureType == 'queen' and queen_move_enable(lastsigned, fieldname, square)) or
+            ((square.get(lastsigned).figureType == 'pawn' and pawn_move_enable(lastsigned, fieldname, square)[0]) or
+             (square.get(lastsigned).figureType == 'knight' and knight_move_enable(lastsigned, fieldname, square)[0]) or
+             (square.get(lastsigned).figureType == 'bishop' and bishop_move_enable(lastsigned, fieldname, square)[0]) or
+             (square.get(lastsigned).figureType == 'rook' and rook_move_enable(lastsigned, fieldname, square)[0]) or
+             (square.get(lastsigned).figureType == 'queen' and queen_move_enable(lastsigned, fieldname, square)[0]) or
              (square.get(lastsigned).figureType == 'king' and king_move_enable(lastsigned, fieldname, square))):
         if whoturn == 'White':
             x = 'w'

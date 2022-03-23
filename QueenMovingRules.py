@@ -1,5 +1,6 @@
 
 def queen_move_enable(queenField, destField, chessBoardStatus):
+    check = 0
     movePossible = 0
     xAxisBoard = ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h')  # x axis fields
     queenColour = chessBoardStatus.get(queenField).figureColour
@@ -51,7 +52,8 @@ def queen_move_enable(queenField, destField, chessBoardStatus):
                 movePossible = 0
                 break
 
-    if chessBoardStatus.get(destField).figureType == 'king':
+    if chessBoardStatus.get(destField).figureType == 'king' and movePossible:
         movePossible = 0
+        check = 1
 
-    return movePossible
+    return movePossible, check

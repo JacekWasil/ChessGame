@@ -1,6 +1,6 @@
 def pawn_move_enable(pawnfield, destField, chessBoardStatus):
     x = ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h') # x axis fields
-
+    check = 0
     movePossible = 0
     pawncolour = chessBoardStatus.get(pawnfield).figureColour
     if pawncolour == 'White':
@@ -54,8 +54,10 @@ def pawn_move_enable(pawnfield, destField, chessBoardStatus):
                                 checkPawnSquareNameLeft).pawnDoubleMove:
                             movePossible = 1
 
-    if chessBoardStatus.get(destField).figureType == 'king':
+    if chessBoardStatus.get(destField).figureType == 'king' and movePossible:
         movePossible = 0
+        check = 1
 
-    return movePossible
+
+    return movePossible, check
 

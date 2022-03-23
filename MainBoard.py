@@ -3,6 +3,14 @@ from tkinter import *
 from SquareGeneration import *  # every square is a class-> example: square.get('b3').squareColour
 from CreateFiguresImages import figure_image_generation
 from FigureSigningAndMove import sign_button, figuremove, movedest
+from FiguresInBoardMemoryForCheck import figures_position_in_memory_board
+from CheckingIfCheckHappened import check_if_check_happened
+from PawnMovingRules import pawn_move_enable
+from RookMovingRules import rook_move_enable
+from BishopMovingRules import bishop_move_enable
+from KnightMovingRules import knight_move_enable
+from QueenMovingRules import queen_move_enable
+
 from PopUpFiguresWhenPawnAtEnd import show_buttons_pawn_at_end_board, choose_button_and_pawn_change_to_figure
 
 gameisstarting = 1
@@ -133,9 +141,17 @@ lastDoubleMove = 'a1' # Inicialize
 waitforfigurechoose = 0
 pawnpositionforupgrate = 'Inicialize'
 def figure_move(chosenfigureendboard =' '):
-    global figuremove, turn, lastDoubleMove, waitforfigurechoose, pawnpositionforupgrate, figurechoosenatendofboard
-    if figuremove[0] == 1:
+    global figuremove, turn, lastDoubleMove, waitforfigurechoose, pawnpositionforupgrate, figurechoosenatendofboard, \
+        figures_position_in_memory_board, check_if_check_happened, pawn_move_enable, rook_move_enable, knight_move_enable, \
+        bishop_move_enable, queen_move_enable
 
+
+    # Check if after move check will happened
+    if figuremove[0] == 1:
+        memoryBoardStatus = figures_position_in_memory_board(movedest[1], movedest[2], square)
+        #check_if_check_happened(turn, memoryBoardStatus, pawn_move_enable, rook_move_enable, knight_move_enable, bishop_move_enable, queen_move_enable)
+
+    if figuremove[0] == 1:
         if square.get(movedest[1]).squareColour == 'light yellow':
             squarebutton[movedest[1]].config(image=wsquare_img, bg= 'light yellow')
         else:
