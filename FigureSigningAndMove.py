@@ -3,6 +3,7 @@ from KnightMovingRules import knight_move_enable
 from BishopMovingRules import bishop_move_enable
 from RookMovingRules import rook_move_enable
 from QueenMovingRules import queen_move_enable
+from KingMovingRules import king_move_enable
 from SquareGeneration import *
 
 
@@ -51,7 +52,7 @@ def sign_button(fieldname, chessboard):
              (square.get(lastsigned).figureType == 'bishop' and bishop_move_enable(lastsigned, fieldname, square)) or
              (square.get(lastsigned).figureType == 'rook' and rook_move_enable(lastsigned, fieldname, square)) or
              (square.get(lastsigned).figureType == 'queen' and queen_move_enable(lastsigned, fieldname, square)) or
-             square.get(lastsigned).figureType == 'king'):
+             (square.get(lastsigned).figureType == 'king' and king_move_enable(lastsigned, fieldname, square))):
         if whoturn == 'White':
             x = 'w'
         else:
