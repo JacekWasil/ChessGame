@@ -21,11 +21,14 @@ def bishop_move_enable(bishoField, destField, chessBoardStatus):
             xMovingDirection = 1
 
         movePossible = 1
-        while memoryForMovingField != destField:
-            memoryForMovingField = f'{xAxisBoard[(xAxisBoard.index(memoryForMovingField[:-1]) + xMovingDirection)]}{int(memoryForMovingField[-1:]) + yMovingDirection}'
-            if chessBoardStatus.get(memoryForMovingField).figureColour != ' ' and memoryForMovingField != destField:
-                movePossible = 0
-                break
+        try:
+            while memoryForMovingField != destField:
+                memoryForMovingField = f'{xAxisBoard[(xAxisBoard.index(memoryForMovingField[:-1]) + xMovingDirection)]}{int(memoryForMovingField[-1:]) + yMovingDirection}'
+                if chessBoardStatus.get(memoryForMovingField).figureColour != ' ' and memoryForMovingField != destField:
+                    movePossible = 0
+                    break
+        except:
+            movePossible = 0
 
     if chessBoardStatus.get(destField).figureType == 'king' and movePossible:
         movePossible = 0

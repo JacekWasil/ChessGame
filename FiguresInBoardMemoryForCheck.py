@@ -8,14 +8,22 @@ def figures_position_in_memory_board(choosenField, destField, chessBoardStatus):
 
     # Check if double moved pawn was captured (if yes: deleted)
     if chessBoardStatus.get(choosenField).figureType == 'pawn':
-        checkPawnSquareNameRight = (f'{(x[(x.index(xactuall) + 1)])}{choosenField[-1:]}')
-        checkPawnSquareNameLeft = (f'{(x[(x.index(xactuall) - 1)])}{choosenField[-1:]}')
+        rightVriableOverTheBoard = 0
+        leftVriableOverTheBoard = 0
+        try:
+            checkPawnSquareNameRight = (f'{(x[(x.index(xactuall) + 1)])}{choosenField[-1:]}')
+        except:
+            rightVriableOverTheBoard = 1
+        try:
+            checkPawnSquareNameLeft = (f'{(x[(x.index(xactuall) - 1)])}{choosenField[-1:]}')
+        except:
+            leftVriableOverTheBoard = 1
         # Check if next to pawn is standing another pawn with opposite colour
-        if chessBoardStatus.get(checkPawnSquareNameRight).figureColour != figureColour or \
-                chessBoardStatus.get(checkPawnSquareNameLeft).figureColour != figureColour:
+        if (rightVriableOverTheBoard == 0 and chessBoardStatus.get(checkPawnSquareNameRight).figureColour != figureColour) or \
+                (leftVriableOverTheBoard == 0 and chessBoardStatus.get(checkPawnSquareNameLeft).figureColour != figureColour):
             # Check if next to pawn is standing another pawn after double move
-            if chessBoardStatus.get(checkPawnSquareNameRight).pawnDoubleMove or \
-                    chessBoardStatus.get(checkPawnSquareNameLeft).pawnDoubleMove:
+            if (rightVriableOverTheBoard == 0 and chessBoardStatus.get(checkPawnSquareNameRight).pawnDoubleMove) or \
+                    (leftVriableOverTheBoard == 0 and chessBoardStatus.get(checkPawnSquareNameLeft).pawnDoubleMove):
                 # check if pass over an attacked square done
                 if chessBoardStatus.get(f'{destField[:-1]}{choosenField[-1:]}').figureType == 'pawn':
                     #delete a beaten pawn

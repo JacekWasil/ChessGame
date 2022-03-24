@@ -50,13 +50,13 @@ def check_if_check_happened(whoTurn, chessBoardStatus, pawnMovingRules, rookMovi
                     if (bishopMovingRules(square, whiteKingPosition, chessBoardStatus))[1] == 1:
                         print('CheckingIfCheckHappened: check by black bishop')
             # Check for queen
-            # if chessBoardStatus.get(square).figureType == 'queen':
-            #     if chessBoardStatus.get(square).figureColour == 'White':
-            #         if (queenMovingRules(square, blackKingPosition, chessBoardStatus))[1] == 1:
-            #             print('CheckingIfCheckHappened: check by white queen')
-            #     if chessBoardStatus.get(square).figureColour == 'Black':
-            #         if (queenMovingRules(square, whiteKingPosition, chessBoardStatus))[1] == 1:
-            #             print('CheckingIfCheckHappened: check by black queen')
+            if chessBoardStatus.get(square).figureType == 'queen':
+                if chessBoardStatus.get(square).figureColour == 'White':
+                    if (queenMovingRules(square, blackKingPosition, chessBoardStatus))[1] == 1:
+                        print('CheckingIfCheckHappened: check by white queen')
+                if chessBoardStatus.get(square).figureColour == 'Black':
+                    if (queenMovingRules(square, whiteKingPosition, chessBoardStatus))[1] == 1:
+                        print('CheckingIfCheckHappened: check by black queen')
 
 
 

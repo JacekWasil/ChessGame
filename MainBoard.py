@@ -149,7 +149,7 @@ def figure_move(chosenfigureendboard =' '):
     # Check if after move check will happened
     if figuremove[0] == 1:
         memoryBoardStatus = figures_position_in_memory_board(movedest[1], movedest[2], square)
-        #check_if_check_happened(turn, memoryBoardStatus, pawn_move_enable, rook_move_enable, knight_move_enable, bishop_move_enable, queen_move_enable)
+        check_if_check_happened(turn, memoryBoardStatus, pawn_move_enable, rook_move_enable, knight_move_enable, bishop_move_enable, queen_move_enable)
 
     if figuremove[0] == 1:
         if square.get(movedest[1]).squareColour == 'light yellow':
