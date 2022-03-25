@@ -69,18 +69,16 @@ def sign_button(fieldname, chessboard):
         movedest[0] = f'{x}{square.get(lastsigned).figureType}_img'
         movedest[1] = square.get(lastsigned).name
         movedest[2] = square.get(fieldname).name
-
-        memoryBoardStatus = figures_position_in_memory_board((movedest[1]), movedest[2], square)
+        memoryBoardStatus = figures_position_in_memory_board(movedest[1], movedest[2], square)
         check = ('check happened = 1', 'which figure made check?')
         check = check_if_check_happened(memoryBoardStatus, pawn_move_enable, rook_move_enable, knight_move_enable, bishop_move_enable, queen_move_enable)
         if check[0] == 1:
-            #figuremove[0] = 0
-            print (check[1])
+            print(check[1])
 
 
         #movement can not be done cause You check Yourself
         if (whoturn == 'White' and check[1][0:14] == 'check by black') or (whoturn == 'Black' and check[1][0:14] == 'check by white'):
-            #figuremove[0] = 0
+            figuremove[0] = 0
             print('still check')
 
 

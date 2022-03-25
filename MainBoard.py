@@ -63,6 +63,9 @@ labellist = {}
 #print (square.get('a1').squareColour)
 def change_figure_colour():
     global figureColours, turn, waitforfigurechoose
+
+
+
     #reset basic values
     waitforfigurechoose = 0
     figuremove[0] = 0
@@ -113,11 +116,11 @@ def change_figure_colour():
             square.get(f'{item}').castlePossible = 1
         item = next(iterator, None)
 
-
-
     ###############################################   TEST    BOARD    ##############################################
-    #testboard()
+    test_board()
     ###############################################   END TEST BOARD   ##############################################
+
+
 
 
 ChooseColourBtn = Button(root, text='Start', bg = 'yellow', padx=14, pady=16, command=change_figure_colour)
@@ -227,6 +230,7 @@ def figure_move(chosenfigureendboard =' '):
         square.get(movedest[1]).figureType = ' '
         square.get(movedest[1]).figureColour = ' '
         square.get(movedest[2]).figureType = movedest[0][1:-4]
+
         if turn == 'White':
             square.get(movedest[2]).figureColour = 'White'
         else:
@@ -269,8 +273,10 @@ def figure_move(chosenfigureendboard =' '):
         turdiplay = Label(text=f" It is {turn} turn", bg='light green')
         turdiplay.place(x=0, y=0)
 
-        ###############################################   TEST    BOARD    ##############################################
-        #testboard()
-        ###############################################   END TEST BOARD   ##############################################
+    ###############################################   TEST    BOARD    ##############################################
+    test_board()
+    ###############################################   END TEST BOARD   ##############################################
+
+
 
 root.mainloop()
