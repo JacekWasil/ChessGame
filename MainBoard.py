@@ -147,9 +147,15 @@ def figure_move(chosenfigureendboard =' '):
 
 
     # Check if after move check will happened
-    if figuremove[0] == 1:
-        memoryBoardStatus = figures_position_in_memory_board(movedest[1], movedest[2], square)
-        check_if_check_happened(turn, memoryBoardStatus, pawn_move_enable, rook_move_enable, knight_move_enable, bishop_move_enable, queen_move_enable)
+    # if figuremove[0] == 1:
+    #     memoryBoardStatus = figures_position_in_memory_board(movedest[1], movedest[2], square)
+    #     check = ('check happened = 1', 'which figure made check?')
+    #     check = check_if_check_happened(memoryBoardStatus, pawn_move_enable, rook_move_enable, knight_move_enable, bishop_move_enable, queen_move_enable)
+    #     if check[0] == 1:
+    #         print (check[1])
+    #     #movement can not be done cause You check Yourself
+    #     if (turn == 'White' and check[1][0:14] == 'check by black') or (turn == 'Black' and check[1][0:14] == 'check by white'):
+    #         figuremove[0] = 0
 
     if figuremove[0] == 1:
         if square.get(movedest[1]).squareColour == 'light yellow':
