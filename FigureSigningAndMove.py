@@ -6,6 +6,7 @@ from QueenMovingRules import queen_move_enable
 from KingMovingRules import king_move_enable
 from FiguresInBoardMemoryForCheck import figures_position_in_memory_board
 from CheckingIfCheckHappened import check_if_check_happened
+import copy
 
 from SquareGeneration import *
 
@@ -63,30 +64,23 @@ def sign_button(fieldname, chessboard):
         else:
             x = 'b'
 
-
-        ############################################ Check if after move check will happened
         figuremove[0] = 1
         movedest[0] = f'{x}{square.get(lastsigned).figureType}_img'
         movedest[1] = square.get(lastsigned).name
         movedest[2] = square.get(fieldname).name
-        memoryBoardStatus = figures_position_in_memory_board(movedest[1], movedest[2], square)
+
+        # Check if after move check will happened
+        squareCopy = copy.deepcopy(square)
+        memoryBoardStatus = figures_position_in_memory_board(movedest[1], movedest[2], squareCopy)
         check = ('check happened = 1', 'which figure made check?')
         check = check_if_check_happened(memoryBoardStatus, pawn_move_enable, rook_move_enable, knight_move_enable, bishop_move_enable, queen_move_enable)
         if check[0] == 1:
             print(check[1])
 
-
         #movement can not be done cause You check Yourself
         if (whoturn == 'White' and check[1][0:14] == 'check by black') or (whoturn == 'Black' and check[1][0:14] == 'check by white'):
             figuremove[0] = 0
             print('still check')
-
-
-
-
-        ###########################################################
-
-
 
         if figuremove[0] == 1:
             square.get(lastsigned).signed = 0
