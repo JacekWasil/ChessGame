@@ -32,25 +32,33 @@ def pawn_move_enable(pawnfield, destField, chessBoardStatus):
         if int(pawnfield[-1:]) + i == int(destField[-1:]): #check if destination in y axis is +1
             if chessBoardStatus.get(destField).figureColour == ' ': #check if destination field is empty
                 # Check if next to white pawn is black (double moved)pawn and other way
-                checkPawnSquareNameRight = (f'{(x[(x.index(xactuall) + 1)])}{pawnfield[-1:]}')
-                checkPawnSquareNameLeft = (f'{(x[(x.index(xactuall) - 1)])}{pawnfield[-1:]}')
+                try:
+                    checkPawnSquareNameRight = (f'{(x[(x.index(xactuall) + 1)])}{pawnfield[-1:]}')
+                except:
+                    checkPawnSquareNameRight = 'none'
+                try:
+                    checkPawnSquareNameLeft = (f'{(x[(x.index(xactuall) - 1)])}{pawnfield[-1:]}')
+                except:
+                    checkPawnSquareNameLeft = 'none'
                 if pawncolour == 'White':
-                    # Check if next to pawn is standing another pawn with opposit colour
-                    if chessBoardStatus.get(
-                            checkPawnSquareNameRight).figureColour == 'Black' or chessBoardStatus.get(
-                            checkPawnSquareNameLeft).figureColour == 'Black':
-                        # Check if next to pawn is standing another pawn after double move
-                        if chessBoardStatus.get(checkPawnSquareNameRight).pawnDoubleMove or \
-                                chessBoardStatus.get(checkPawnSquareNameLeft).pawnDoubleMove:
+                    # Check if next to pawn is standing another pawn with opposit colour and double move
+                    if checkPawnSquareNameRight != 'none':
+                        if chessBoardStatus.get(checkPawnSquareNameRight).figureColour == 'Black' and chessBoardStatus.get(checkPawnSquareNameRight).pawnDoubleMove:
+                            movePossible = 1
+                    if checkPawnSquareNameLeft != 'none':
+                        if chessBoardStatus.get(checkPawnSquareNameLeft).figureColour == 'Black' and chessBoardStatus.get(
+                            checkPawnSquareNameLeft).pawnDoubleMove:
                             movePossible = 1
                 if pawncolour == 'Black':
-                    # Check if next to pawn is standing another pawn with opposite colour
-                    if chessBoardStatus.get(
-                            checkPawnSquareNameRight).figureColour == 'White' or chessBoardStatus.get(
-                            checkPawnSquareNameLeft).figureColour == 'White':
-                        # Check if next to pawn is standing another pawn after double move
+                    # Check if next to pawn is standing another pawn with opposit colour and double move
+                    if checkPawnSquareNameRight != 'none':
                         if chessBoardStatus.get(
-                                checkPawnSquareNameRight).pawnDoubleMove or chessBoardStatus.get(
+                                checkPawnSquareNameRight).figureColour == 'White' and chessBoardStatus.get(
+                                checkPawnSquareNameRight).pawnDoubleMove:
+                            movePossible = 1
+                    if checkPawnSquareNameLeft != 'none':
+                        if chessBoardStatus.get(
+                                checkPawnSquareNameLeft).figureColour == 'White' and chessBoardStatus.get(
                                 checkPawnSquareNameLeft).pawnDoubleMove:
                             movePossible = 1
 

@@ -75,8 +75,8 @@ def sign_button(fieldname, chessboard):
         check = check_if_check_happened(memoryBoardStatus, pawn_move_enable, rook_move_enable, knight_move_enable, bishop_move_enable, queen_move_enable) #check = ('check happened = 1', 'which figure made check?')
 
         #####
-        #possibilitiesToMove = movement_generator(lastsigned, square)
-        #print(possibilitiesToMove)
+        possibilitiesToMove = movement_generator(lastsigned, square)
+        print(possibilitiesToMove)
         ########
         if check[0] == 1:
 
