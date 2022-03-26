@@ -74,37 +74,38 @@ def sign_button(fieldname, chessboard):
         memoryBoardStatus = figures_position_in_memory_board(movedest[1], movedest[2], squareCopy)
         check = check_if_check_happened(memoryBoardStatus, pawn_move_enable, rook_move_enable, knight_move_enable, bishop_move_enable, queen_move_enable) #check = ('check happened = 1', 'which figure made check?')
 
-        #####
-        possibilitiesToMove = movement_generator(lastsigned, square)
-        print(possibilitiesToMove)
-        ########
         if check[0] == 1:
-
-
-
+            print(check[1])
         ########################   TEST for movement generator    ##################
-            # squareCopyForMovementGeneration = copy.deepcopy(memoryBoardStatus)
-            # horizontal = ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h')  # x axis fields
-            # vertical = ('1', '2', '3', '4', '5', '6', '7', '8')  # y axis fields
-            # for x in horizontal:
-            #     for y in vertical:
-            #         if memoryBoardStatus.get(f'{x}{y}').figureColour == whoturn:
-            #             choosenFigureFieldForKingDefend = f'{x}{y}'
-            #             possibilitiesToMove = movement_generator(choosenFigureFieldForKingDefend, squareCopyForMovementGeneration)
-            #             print (possibilitiesToMove)
-
-
-
-
-
+            horizontal = ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h')  # x axis fields
+            vertical = ('1', '2', '3', '4', '5', '6', '7', '8')  # y axis fields
+            checkMateStatus = [0,0]
+            checkMate = 1
+            for x in horizontal:
+                for y in vertical:
+                    if memoryBoardStatus.get(f'{x}{y}').figureColour != whoturn:
+                        choosenFigureFieldForKingDefend = f'{x}{y}'
+                        possibilitiesToMove = movement_generator(choosenFigureFieldForKingDefend, memoryBoardStatus)
+                        #check if checkmate happened
+                        for destField in possibilitiesToMove:
+                            memoryBoardStatusCopy = copy.deepcopy(memoryBoardStatus)
+                            memoryBoardStatus2 = figures_position_in_memory_board(choosenFigureFieldForKingDefend, destField, memoryBoardStatusCopy)
+                            checkMateStatus = check_if_check_happened(memoryBoardStatus2, pawn_move_enable, rook_move_enable,knight_move_enable, bishop_move_enable, queen_move_enable)
+                            if checkMateStatus[0] == 0:
+                                checkMate = 0
+                                break
+                        if checkMate == 0:
+                            break
+                    if checkMate == 0:
+                        break
+                if checkMate == 0:
+                    break
+            if checkMateStatus[0] == 1:
+                print('Check mate')
 
             #######################################################
 
 
-
-
-
-            print(check[1])
         #movement can not be done cause You check Yourself or check still exist
         if (whoturn == 'White' and check[1][0:14] == 'check by black') or (whoturn == 'Black' and check[1][0:14] == 'check by white'):
             figuremove[0] = 0
