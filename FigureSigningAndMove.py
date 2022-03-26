@@ -6,9 +6,8 @@ from QueenMovingRules import queen_move_enable
 from KingMovingRules import king_move_enable
 from FiguresInBoardMemoryForCheck import figures_position_in_memory_board
 from CheckingIfCheckHappened import check_if_check_happened
-import copy
-
 from SquareGeneration import *
+import copy
 
 
 lastsigned = '' #last signed square
@@ -37,7 +36,6 @@ def sign_button(fieldname, chessboard):
 
     if lastsigned == '':
         lastsigned = fieldname
-
 
     if donotsignfigure == 0 and ((whoturn == 'White' and square.get(fieldname).figureColour == 'White') or (whoturn == 'Black' and square.get(fieldname).figureColour == 'Black')):
         actualchoice = fieldname

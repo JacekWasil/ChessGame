@@ -116,6 +116,9 @@ def change_figure_colour():
             square.get(f'{item}').castlePossible = 1
         item = next(iterator, None)
 
+        #delete the bug- after sign black and double reset chessboard it was black move first
+        sign_button('a3', squarebutton)
+
     ###############################################   TEST    BOARD    ##############################################
     test_board()
     ###############################################   END TEST BOARD   ##############################################
