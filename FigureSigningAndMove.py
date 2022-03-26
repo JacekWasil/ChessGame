@@ -6,6 +6,7 @@ from QueenMovingRules import queen_move_enable
 from KingMovingRules import king_move_enable
 from FiguresInBoardMemoryForCheck import figures_position_in_memory_board
 from CheckingIfCheckHappened import check_if_check_happened
+from MovementGenerator import movement_generator
 from SquareGeneration import *
 import copy
 
@@ -57,6 +58,7 @@ def sign_button(fieldname, chessboard):
              (square.get(lastsigned).figureType == 'queen' and queen_move_enable(lastsigned, fieldname, square)[0]) or
              (square.get(lastsigned).figureType == 'king' and king_move_enable(lastsigned, fieldname, square))):
 
+
         if whoturn == 'White':
             x = 'w'
         else:
@@ -70,15 +72,46 @@ def sign_button(fieldname, chessboard):
         # Check if after move check will happened
         squareCopy = copy.deepcopy(square)
         memoryBoardStatus = figures_position_in_memory_board(movedest[1], movedest[2], squareCopy)
-        check = ('check happened = 1', 'which figure made check?')
-        check = check_if_check_happened(memoryBoardStatus, pawn_move_enable, rook_move_enable, knight_move_enable, bishop_move_enable, queen_move_enable)
-        if check[0] == 1:
-            print(check[1])
+        check = check_if_check_happened(memoryBoardStatus, pawn_move_enable, rook_move_enable, knight_move_enable, bishop_move_enable, queen_move_enable) #check = ('check happened = 1', 'which figure made check?')
 
-        #movement can not be done cause You check Yourself
+        #####
+        #possibilitiesToMove = movement_generator(lastsigned, square)
+        #print(possibilitiesToMove)
+        ########
+        if check[0] == 1:
+
+
+
+        ########################   TEST for movement generator    ##################
+            # squareCopyForMovementGeneration = copy.deepcopy(memoryBoardStatus)
+            # horizontal = ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h')  # x axis fields
+            # vertical = ('1', '2', '3', '4', '5', '6', '7', '8')  # y axis fields
+            # for x in horizontal:
+            #     for y in vertical:
+            #         if memoryBoardStatus.get(f'{x}{y}').figureColour == whoturn:
+            #             choosenFigureFieldForKingDefend = f'{x}{y}'
+            #             possibilitiesToMove = movement_generator(choosenFigureFieldForKingDefend, squareCopyForMovementGeneration)
+            #             print (possibilitiesToMove)
+
+
+
+
+
+
+            #######################################################
+
+
+
+
+
+            print(check[1])
+        #movement can not be done cause You check Yourself or check still exist
         if (whoturn == 'White' and check[1][0:14] == 'check by black') or (whoturn == 'Black' and check[1][0:14] == 'check by white'):
             figuremove[0] = 0
-            print('still check')
+            print('check: movement can not be done')
+
+
+
 
         if figuremove[0] == 1:
             square.get(lastsigned).signed = 0
