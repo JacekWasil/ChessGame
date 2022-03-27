@@ -72,7 +72,7 @@ def king_move_enable(kingField, destField, chessBoardStatus):
                                 (chessBoardStatus.get(choosenFigureFieldForAttackCastleplaces).figureType == 'queen' and queen_move_enable(choosenFigureFieldForAttackCastleplaces, i, chessBoardStatus)[0]) or \
                                 (chessBoardStatus.get(f'a{oppositeKingPositionY}').figureType == 'king') or (chessBoardStatus.get(f'b{oppositeKingPositionY}').figureType == 'king') or\
                                 (chessBoardStatus.get(f'c{oppositeKingPositionY}').figureType == 'king'):
-                                movePossible = 0 #a
+                                movePossible = 0
 
         if (chessBoardStatus.get(f'h{kingField[-1:]}').castlePossible and \
                 chessBoardStatus.get(f'f{kingField[-1:]}').figureType == ' ' and \
