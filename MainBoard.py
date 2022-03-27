@@ -10,6 +10,7 @@ from RookMovingRules import rook_move_enable
 from BishopMovingRules import bishop_move_enable
 from KnightMovingRules import knight_move_enable
 from QueenMovingRules import queen_move_enable
+from FigureSigningAndMove import show_check_result
 
 from PopUpFiguresWhenPawnAtEnd import show_buttons_pawn_at_end_board, choose_button_and_pawn_change_to_figure
 
@@ -60,9 +61,9 @@ endbuttonqueen = Button(root,  bg='red', command=lambda: figure_move(choose_butt
 labellist = {}
 ###############################################   END TEST BOARD   ##############################################
 
-#print (square.get('a1').squareColour)
+checkResult = ( )
 def change_figure_colour():
-    global figureColours, turn, waitforfigurechoose
+    global figureColours, turn, waitforfigurechoose, checkResult
 
 
 
@@ -277,6 +278,10 @@ def figure_move(chosenfigureendboard =' '):
 
         turdiplay = Label(text=f" It is {turn} turn", bg='light green')
         turdiplay.place(x=0, y=0)
+
+    turdiplay = Label(text=f'{show_check_result()}', bg='light green')
+    turdiplay.place(x=300, y=10)
+
 
     ###############################################   TEST    BOARD    ##############################################
     #test_board()

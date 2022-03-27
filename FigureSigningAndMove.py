@@ -17,11 +17,17 @@ figuremove = [0] #If figure move == 1 then move figure and reset this bit to 0
 movedest = ['','',''] #Which figure move from where to where move figure 0-figure type, 1- from where, 2- to where
 whoturn = ' '
 lastsquarecolour = 'light blue'
+checkResultMessage = '                                                                    '
+def show_check_result():
+    global checkResultMessage
+    return (checkResultMessage)
+
 #Figure signing
 def sign_button(fieldname, chessboard, checkAfterPawnReachEndPos = 0):
-    global lastsigned, actualchoice, figuremove, movedest, whoturn, lastsquarecolour, stillCheck
+    global lastsigned, actualchoice, figuremove, movedest, whoturn, lastsquarecolour, stillCheck, checkResultMessage
     # Block signing if pawn is at end of board and is not changed to figure
     donotsignfigure = 0
+
 
     for i in ('a', 'b','c','d','e','f','g','h'):
         if square.get(f'{i}1').figureType == 'pawn' or square.get(f'{i}8').figureType == 'pawn':
@@ -75,7 +81,7 @@ def sign_button(fieldname, chessboard, checkAfterPawnReachEndPos = 0):
         check = check_if_check_happened(memoryBoardStatus, pawn_move_enable, rook_move_enable, knight_move_enable, bishop_move_enable, queen_move_enable) #check = ('check happened = 1', 'which figure made check?')
 
         if check[0] == 1:
-            print(check[1])
+            checkResultMessage = f'{check[1]}                               '
             horizontal = ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h')  # x axis fields
             vertical = ('1', '2', '3', '4', '5', '6', '7', '8')  # y axis fields
             checkMateStatus = [0,0]
@@ -100,7 +106,7 @@ def sign_button(fieldname, chessboard, checkAfterPawnReachEndPos = 0):
                 if checkMate == 0:
                     break
             if checkMateStatus[0] == 1:
-                print('Check mate')
+                checkResultMessage = 'Check mate'
 
             #######################################################
 
@@ -108,8 +114,10 @@ def sign_button(fieldname, chessboard, checkAfterPawnReachEndPos = 0):
         #movement can not be done cause You check Yourself or check still exist
         if (whoturn == 'White' and check[1][0:14] == 'check by black') or (whoturn == 'Black' and check[1][0:14] == 'check by white'):
             figuremove[0] = 0
-            print('check: movement can not be done')
+            checkResultMessage = 'check: movement can not be done'
 
+        if check[0] == 0:
+            checkResultMessage = '                                                                    '
 
 
 
@@ -121,6 +129,8 @@ def sign_button(fieldname, chessboard, checkAfterPawnReachEndPos = 0):
                 whoturn = 'Black'
             else:
                 whoturn = 'White'
+
+
 
     return lastsigned, actualchoice
 
