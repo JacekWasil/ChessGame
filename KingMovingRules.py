@@ -1,3 +1,9 @@
+from PawnMovingRules import pawn_move_enable
+from KnightMovingRules import knight_move_enable
+from BishopMovingRules import bishop_move_enable
+from RookMovingRules import rook_move_enable
+from QueenMovingRules import queen_move_enable
+
 def king_move_enable(kingField, destField, chessBoardStatus):
     movePossible = 0
     xAxisBoard = ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h')  # x axis fields
@@ -45,10 +51,55 @@ def king_move_enable(kingField, destField, chessBoardStatus):
                 chessBoardStatus.get(f'c{kingField[-1:]}').figureType == ' ' and \
                 chessBoardStatus.get(f'd{kingField[-1:]}').figureType == ' '):
             movePossible = 1
+
+            #Check if any figure is attacking castle fields
+            horizontal = ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h')  # x axis fields
+            vertical = ('1', '2', '3', '4', '5', '6', '7', '8')  # y axis fields
+            fieldToCheckForCastle = [(f'a{kingField[-1:]}'),(f'b{kingField[-1:]}'),(f'c{kingField[-1:]}'),(f'd{kingField[-1:]}')]
+            if kingColour == 'White':
+                oppositeKingPositionY = 2
+            else:
+                oppositeKingPositionY = 7
+            for x in horizontal:
+                for y in vertical:
+                    if chessBoardStatus.get(f'{x}{y}').figureColour != kingColour:
+                        choosenFigureFieldForAttackCastleplaces = f'{x}{y}'
+                        for i in fieldToCheckForCastle:
+                            if (chessBoardStatus.get(choosenFigureFieldForAttackCastleplaces).figureType == 'pawn' and pawn_move_enable(choosenFigureFieldForAttackCastleplaces, i, chessBoardStatus)[0]) or \
+                                (chessBoardStatus.get(choosenFigureFieldForAttackCastleplaces).figureType == 'knight' and knight_move_enable(choosenFigureFieldForAttackCastleplaces, i, chessBoardStatus)[0]) or\
+                                (chessBoardStatus.get(choosenFigureFieldForAttackCastleplaces).figureType == 'bishop' and bishop_move_enable(choosenFigureFieldForAttackCastleplaces, i, chessBoardStatus)[0]) or\
+                                (chessBoardStatus.get(choosenFigureFieldForAttackCastleplaces).figureType == 'rook' and rook_move_enable(choosenFigureFieldForAttackCastleplaces, i, chessBoardStatus)[0]) or\
+                                (chessBoardStatus.get(choosenFigureFieldForAttackCastleplaces).figureType == 'queen' and queen_move_enable(choosenFigureFieldForAttackCastleplaces, i, chessBoardStatus)[0]) or \
+                                (chessBoardStatus.get(f'a{oppositeKingPositionY}').figureType == 'king') or (chessBoardStatus.get(f'b{oppositeKingPositionY}').figureType == 'king') or\
+                                (chessBoardStatus.get(f'c{oppositeKingPositionY}').figureType == 'king'):
+                                movePossible = 0
+
         if (chessBoardStatus.get(f'h{kingField[-1:]}').castlePossible and \
                 chessBoardStatus.get(f'f{kingField[-1:]}').figureType == ' ' and \
                 chessBoardStatus.get(f'g{kingField[-1:]}').figureType == ' '):
             movePossible = 1
+
+            # Check if any figure is attacking castle fields
+            horizontal = ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h')  # x axis fields
+            vertical = ('1', '2', '3', '4', '5', '6', '7', '8')  # y axis fields
+            fieldToCheckForCastle = [(f'f{kingField[-1:]}'), (f'g{kingField[-1:]}'), (f'h{kingField[-1:]}')]
+            if kingColour == 'White':
+                oppositeKingPositionY = 2
+            else:
+                oppositeKingPositionY = 7
+            for x in horizontal:
+                for y in vertical:
+                    if chessBoardStatus.get(f'{x}{y}').figureColour != kingColour:
+                        choosenFigureFieldForAttackCastleplaces = f'{x}{y}'
+                        for i in fieldToCheckForCastle:
+                            if (chessBoardStatus.get(choosenFigureFieldForAttackCastleplaces).figureType == 'pawn' and
+                                pawn_move_enable(choosenFigureFieldForAttackCastleplaces, i, chessBoardStatus)[0]) or \
+                                    (chessBoardStatus.get(choosenFigureFieldForAttackCastleplaces).figureType == 'knight' and knight_move_enable(choosenFigureFieldForAttackCastleplaces, i, chessBoardStatus)[0]) or \
+                                    (chessBoardStatus.get(choosenFigureFieldForAttackCastleplaces).figureType == 'bishop' and bishop_move_enable(choosenFigureFieldForAttackCastleplaces, i, chessBoardStatus)[0]) or \
+                                    (chessBoardStatus.get(choosenFigureFieldForAttackCastleplaces).figureType == 'rook' and rook_move_enable(choosenFigureFieldForAttackCastleplaces, i, chessBoardStatus)[0]) or \
+                                    (chessBoardStatus.get(choosenFigureFieldForAttackCastleplaces).figureType == 'queen' and queen_move_enable(choosenFigureFieldForAttackCastleplaces, i, chessBoardStatus)[0]) or \
+                                    (chessBoardStatus.get(f'g{oppositeKingPositionY}').figureType == 'king') or (chessBoardStatus.get(f'h{oppositeKingPositionY}').figureType == 'king'):
+                                movePossible = 0
 
 
 

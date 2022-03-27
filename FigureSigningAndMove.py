@@ -76,7 +76,6 @@ def sign_button(fieldname, chessboard, checkAfterPawnReachEndPos = 0):
 
         if check[0] == 1:
             print(check[1])
-        ########################   TEST for movement generator    ##################
             horizontal = ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h')  # x axis fields
             vertical = ('1', '2', '3', '4', '5', '6', '7', '8')  # y axis fields
             checkMateStatus = [0,0]
