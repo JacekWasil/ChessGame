@@ -113,7 +113,7 @@ def sign_button(fieldname, chessboard, checkAfterPawnReachEndPos = 0):
 
 
 
-        if figuremove[0] == 1:
+        if figuremove[0] == 1 and not checkAfterPawnReachEndPos:
             square.get(lastsigned).signed = 0
             lastsigned = ''
             actualchoice = ''
