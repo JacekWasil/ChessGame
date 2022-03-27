@@ -120,7 +120,7 @@ def change_figure_colour():
         sign_button('a3', squarebutton)
 
     ###############################################   TEST    BOARD    ##############################################
-    test_board()
+    #test_board()
     ###############################################   END TEST BOARD   ##############################################
 
 
@@ -265,6 +265,8 @@ def figure_move(chosenfigureendboard =' '):
             #change position in board memory
             square.get(pawnpositionforupgrate).figureType = chosenfigureendboard
             waitforfigurechoose = 0
+            #Check if at end position pawn will check after promotion
+            sign_button(movedest[2], square, 1)
 
         if waitforfigurechoose == 0:
             figuremove[0] = 0
@@ -277,7 +279,7 @@ def figure_move(chosenfigureendboard =' '):
         turdiplay.place(x=0, y=0)
 
     ###############################################   TEST    BOARD    ##############################################
-    test_board()
+    #test_board()
     ###############################################   END TEST BOARD   ##############################################
 
 

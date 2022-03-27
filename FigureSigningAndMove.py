@@ -18,7 +18,7 @@ movedest = ['','',''] #Which figure move from where to where move figure 0-figur
 whoturn = ' '
 lastsquarecolour = 'light blue'
 #Figure signing
-def sign_button(fieldname, chessboard):
+def sign_button(fieldname, chessboard, checkAfterPawnReachEndPos = 0):
     global lastsigned, actualchoice, figuremove, movedest, whoturn, lastsquarecolour, stillCheck
     # Block signing if pawn is at end of board and is not changed to figure
     donotsignfigure = 0
@@ -50,13 +50,13 @@ def sign_button(fieldname, chessboard):
         lastsigned = square.get(fieldname).name
 
     #check if move is possible
-    if donotsignfigure == 0 and lastsigned != fieldname and lastsigned != '' and \
+    if (donotsignfigure == 0 and lastsigned != fieldname and lastsigned != '' and
             ((square.get(lastsigned).figureType == 'pawn' and pawn_move_enable(lastsigned, fieldname, square)[0]) or
              (square.get(lastsigned).figureType == 'knight' and knight_move_enable(lastsigned, fieldname, square)[0]) or
              (square.get(lastsigned).figureType == 'bishop' and bishop_move_enable(lastsigned, fieldname, square)[0]) or
              (square.get(lastsigned).figureType == 'rook' and rook_move_enable(lastsigned, fieldname, square)[0]) or
              (square.get(lastsigned).figureType == 'queen' and queen_move_enable(lastsigned, fieldname, square)[0]) or
-             (square.get(lastsigned).figureType == 'king' and king_move_enable(lastsigned, fieldname, square))):
+             (square.get(lastsigned).figureType == 'king' and king_move_enable(lastsigned, fieldname, square)))) or checkAfterPawnReachEndPos:
 
 
         if whoturn == 'White':
