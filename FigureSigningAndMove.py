@@ -98,7 +98,6 @@ def sign_button(fieldname, chessboard, checkAfterPawnReachEndPos = 0):
 
                     if possibilitiesToMove != [] and memoryBoardStatus.get(f'{x}{y}').figureType != 'king':
                         stalemate = 0
-                    print (f'{choosenFigureFieldForKingDefend}, {possibilitiesToMove} : {stalemate}')
                     ################################
                     #check if checkmate or stalemate happened
                     for destField in possibilitiesToMove:
