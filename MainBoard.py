@@ -119,9 +119,11 @@ def change_figure_colour():
 
         #delete the bug- after sign black and double reset chessboard it was black move first
         sign_button('a3', squarebutton)
-
+        #reset chess status comment above the chessboard
+        turdiplay = Label(text=f'{show_check_result(1)}', bg='light green')
+        turdiplay.place(x=300, y=10)
     ###############################################   TEST    BOARD    ##############################################
-    #test_board()
+    test_board()
     ###############################################   END TEST BOARD   ##############################################
 
 
@@ -284,7 +286,7 @@ def figure_move(chosenfigureendboard =' '):
 
 
     ###############################################   TEST    BOARD    ##############################################
-    #test_board()
+    test_board()
     ###############################################   END TEST BOARD   ##############################################
 
 
