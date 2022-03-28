@@ -123,7 +123,7 @@ def sign_button(fieldname, chessboard, checkAfterPawnReachEndPos = 0):
             checkResultMessage = 'Check mate'
 
         #movement can not be done cause You check Yourself or check still exist
-        if (whoturn == 'White' and check[1][0:14] == 'check by black') or (whoturn == 'Black' and check[1][0:14] == 'check by white'):
+        if ((whoturn == 'White' and check[1][0:14] == 'check by black') or (whoturn == 'Black' and check[1][0:14] == 'check by white')) and checkAfterPawnReachEndPos == 0:
             figuremove[0] = 0
             checkResultMessage = 'check: movement can not be done'
 
