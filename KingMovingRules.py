@@ -101,8 +101,6 @@ def king_move_enable(kingField, destField, chessBoardStatus):
                                     (chessBoardStatus.get(f'g{oppositeKingPositionY}').figureType == 'king') or (chessBoardStatus.get(f'h{oppositeKingPositionY}').figureType == 'king'):
                                 movePossible = 0
 
-
-
     if chessBoardStatus.get(destField).figureType == 'king':
         movePossible = 0
 
