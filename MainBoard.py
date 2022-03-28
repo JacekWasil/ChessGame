@@ -58,14 +58,12 @@ endbuttonqueen = Button(root,  bg='red', command=lambda: figure_move(choose_butt
                                                                                                              endbuttonqueen)))
 
 ###############################################   TEST    BOARD    ##############################################
-labellist = {}
+#labellist = {}
 ###############################################   END TEST BOARD   ##############################################
 
 checkResult = ( )
 def change_figure_colour():
     global figureColours, turn, waitforfigurechoose, checkResult
-
-
 
     #reset basic values
     waitforfigurechoose = 0
@@ -106,7 +104,7 @@ def change_figure_colour():
                 text.place(x=posx - 55, y=posy - 50)
 
         ###############################################   TEST    BOARD    ##############################################
-        labellist[f'{item}'] = item
+        #labellist[f'{item}'] = item
         ###############################################   END TEST BOARD   ##############################################
 
         fig = globals()[figure_image_generation(square.get(item).figureColour, square.get(item).figureType, square.get(item).squareColour)]
@@ -126,23 +124,20 @@ def change_figure_colour():
     #test_board()
     ###############################################   END TEST BOARD   ##############################################
 
-
-
-
 ChooseColourBtn = Button(root, text='Start', bg = 'yellow', padx=14, pady=16, command=change_figure_colour)
 ChooseColourBtn.place(x=0, y=50)
 
-###############################################   TEST    BOARD    ##############################################
-def test_board():
-    for i in labellist:
-        tempclear = '          '
-        tempfigcolour = square.get(f'{i}').figureColour
-        tempfigtype = square.get(f'{i}').figureType
-        if square.get(f'{i}').figureColour == ' ' and square.get(f'{i}').figureType == ' ':
-            tempfigcolour = tempclear
-            tempfigtype = tempclear
-        labellist[i] = Label(text= f'{tempfigcolour} \n{tempfigtype} \n{square.get(i).pawnDoubleMove}', bg='light green')
-        labellist[i].place(x=square.get(f'{i}').posX + 550, y=square.get(f'{i}').posY + 18)
+# ###############################################   TEST    BOARD    ##############################################
+# def test_board():
+#     for i in labellist:
+#         tempclear = '          '
+#         tempfigcolour = square.get(f'{i}').figureColour
+#         tempfigtype = square.get(f'{i}').figureType
+#         if square.get(f'{i}').figureColour == ' ' and square.get(f'{i}').figureType == ' ':
+#             tempfigcolour = tempclear
+#             tempfigtype = tempclear
+#         labellist[i] = Label(text= f'{tempfigcolour} \n{tempfigtype} \n{square.get(i).pawnDoubleMove}', bg='light green')
+#         labellist[i].place(x=square.get(f'{i}').posX + 550, y=square.get(f'{i}').posY + 18)
 ###############################################   END TEST BOARD   ##############################################
 
 #display figure move
@@ -153,18 +148,6 @@ def figure_move(chosenfigureendboard =' '):
     global figuremove, turn, lastDoubleMove, waitforfigurechoose, pawnpositionforupgrate, figurechoosenatendofboard, \
         figures_position_in_memory_board, check_if_check_happened, pawn_move_enable, rook_move_enable, knight_move_enable, \
         bishop_move_enable, queen_move_enable
-
-
-    # Check if after move check will happened
-    # if figuremove[0] == 1:
-    #     memoryBoardStatus = figures_position_in_memory_board(movedest[1], movedest[2], square)
-    #     check = ('check happened = 1', 'which figure made check?')
-    #     check = check_if_check_happened(memoryBoardStatus, pawn_move_enable, rook_move_enable, knight_move_enable, bishop_move_enable, queen_move_enable)
-    #     if check[0] == 1:
-    #         print (check[1])
-    #     #movement can not be done cause You check Yourself
-    #     if (turn == 'White' and check[1][0:14] == 'check by black') or (turn == 'Black' and check[1][0:14] == 'check by white'):
-    #         figuremove[0] = 0
 
     if figuremove[0] == 1:
         if square.get(movedest[1]).squareColour == 'light yellow':
@@ -261,7 +244,6 @@ def figure_move(chosenfigureendboard =' '):
             pawnpositionforupgrate = movedest[2]
             waitforfigurechoose = 1
 
-
         # change pawn to choosen figure
         if chosenfigureendboard != ' ' and waitforfigurechoose == 1:
             squarebutton[pawnpositionforupgrate].config(image=globals()[f'{turn[:-4].lower()}{chosenfigureendboard}_img'])
@@ -284,11 +266,8 @@ def figure_move(chosenfigureendboard =' '):
     turdiplay = Label(text=f'{show_check_result()}', bg='light green')
     turdiplay.place(x=300, y=10)
 
-
     ###############################################   TEST    BOARD    ##############################################
     #test_board()
     ###############################################   END TEST BOARD   ##############################################
-
-
 
 root.mainloop()
