@@ -157,7 +157,7 @@ def figure_move(chosenfigureendboard =' '):
         squarebutton[movedest[2]].config(image = img_collection[f'{movedest[0]}'])
 
         #Delete beating pawn after beating in fly
-        if square.get(lastDoubleMove).pawnDoubleMove:
+        if square.get(lastDoubleMove).pawnDoubleMove and movedest[0][1:-4] == 'pawn':
             if (movedest[2][:-1]) == (lastDoubleMove[:-1]) and ((turn == 'White' and (int(movedest[2][-1:]) - 1 == int(lastDoubleMove[-1:]))) or (turn == 'Black' and (int(movedest[2][-1:]) + 1 == int(lastDoubleMove[-1:])))):
                 if square.get(lastDoubleMove).squareColour == 'light yellow':
                     squarebutton[lastDoubleMove].config(image=wsquare_img, bg='light yellow')
@@ -214,6 +214,21 @@ def figure_move(chosenfigureendboard =' '):
                         squarebutton['h8'].config(image=bsquare_img)
                     square.get('h8').figureType = ' '
                     square.get('h8').figureColour = ' '
+        #Clear castle move possibility after one figure move
+        if movedest[1] == 'a1':
+            square.get('a1').castlePossible = 0
+        elif movedest[1] == 'e1':
+            square.get('e1').castlePossible = 0
+        elif movedest[1] == 'h1':
+            square.get('h1').castlePossible = 0
+        elif movedest[1] == 'a8':
+            square.get('a8').castlePossible = 0
+        elif movedest[1] == 'e8':
+            square.get('e8').castlePossible = 0
+        elif movedest[1] == 'h8':
+            square.get('h8').castlePossible = 0
+
+
 
         #Change figures position in chessboard memory
         square.get(movedest[1]).figureType = ' '
